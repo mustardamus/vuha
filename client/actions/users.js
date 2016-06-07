@@ -1,8 +1,4 @@
-export default {
-  ready () {
-    // this.getUsers()
-  },
-
+module.exports = {
   getUsers () {
     this.$request('get', 'users', (err, res) => {
       if (err) {
@@ -51,18 +47,5 @@ export default {
         this.$root.getUsers()
       }
     })
-  },
-
-  addNotifyMessage (type, content) {
-    if (!content) {
-      content = type
-      type = 'info'
-    }
-
-    this.$root.notifyMessages.push({ type, content })
-  },
-
-  removeNotifyMessage (message) {
-    this.$root.notifyMessages.$remove(message)
   }
 }

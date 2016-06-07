@@ -19,13 +19,22 @@
 </template>
 
 <script>
+import _ from 'lodash'
+const Bulk = require('bulk-require')
+
 import State from './state.js'
-import Actions from './actions.js'
 import LogDataChangeMixin from './mixins/logDataChange.js'
+
+const actionsObj = Bulk(__dirname, [ 'actions/*.js']).actions
+let actions = {}
+
+for (let actionKey in actionsObj) {
+  _.assign(actions, actionsObj[actionKey])
+}
 
 export default {
   data () { return State },
-  methods: Actions,
+  methods: actions,
   mixins: [LogDataChangeMixin],
 
   components: {
@@ -38,8 +47,6 @@ export default {
     if (process.env.NODE_ENV === 'development') {
       this.$logDataChange()
     }
-
-    this.ready()
   }
 }
 </script>
