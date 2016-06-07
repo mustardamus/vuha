@@ -38,13 +38,8 @@ const ekso = Ekso({
 ])
 
 const initLog = function (namespace, obj) {
-  let arr = []
-
-  for (let name in obj) {
-    arr.push(name)
-  }
-
-  console.log(Chalk.green(namespace + ':'), Chalk.yellow(arr.join(', ')))
+  const keys = Object.keys(obj).join(', ')
+  console.log(Chalk.green(namespace + ':'), Chalk.yellow(keys))
 }
 
 initLog('Plugins', ekso.Plugins)
