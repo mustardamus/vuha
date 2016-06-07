@@ -1,9 +1,10 @@
+import _ from 'lodash'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueForm from 'vue-form'
+const Bulk = require('bulk-require')
 
 import App from './App.vue'
-import Routes from './routes.js'
 
 import RequestMixin from './mixins/request.js'
 import CashMixin from './mixins/cash.js'
@@ -14,8 +15,14 @@ Vue.use(VueForm)
 Vue.mixin(RequestMixin)
 Vue.mixin(CashMixin)
 
-let $root = Vue.extend(App)
-let router = new VueRouter()
+const $root = Vue.extend(App)
+const router = new VueRouter()
+const routesObj = Bulk(__dirname, [ 'routes/*.js']).routes
+let routes = {}
 
-router.map(Routes)
+for (let routeKey in routesObj) {
+  _.assign(routes, routesObj[routeKey])
+}
+
+router.map(routes)
 router.start($root, '#app')

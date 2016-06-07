@@ -8,6 +8,9 @@
     "client_port": 9991,
     "server_port": 9992
   },
+  "browserify": {
+    "transform": ["vueify", "babelify", "envify", "bulkify"]
+  },
   "scripts": {
     "client-clean": "rm -rf ./public && mkdir public",
     "client-copy": "cp client/public/** public/",
@@ -26,13 +29,6 @@
     "build": "npm run client-clean && npm run client-copy && npm run client-build",
     "lint": "parallelshell 'npm run client-lint' 'npm run server-lint'",
     "test": "parallelshell 'npm run client-test' 'npm run server-test'"
-  },
-  "browserify": {
-    "transform": [
-      "vueify",
-      "babelify",
-      "envify"
-    ]
   },
   "dependencies": {
     "async": "^2.0.0-rc.3",
@@ -64,6 +60,7 @@
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
     "browserify-hmr": "^0.3.1",
+    "bulkify": "^1.2.0",
     "cross-env": "^1.0.7",
     "envify": "^3.4.0",
     "eslint": "^2.8.0",
