@@ -14,7 +14,7 @@ export default {
   data () {
     return {
       messages: this.$root.notifyMessages,
-      timeout: this.$root.notifyTimeout
+      timeout: 10000
     }
   },
 
