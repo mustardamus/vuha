@@ -19,9 +19,7 @@ export default {
   },
 
   ready () {
-    this.$request('post', 'users', { username: '', password: '123' }, (err, res) => {
-      console.log(err, res)
-    })
+  
   },
 
   methods: {

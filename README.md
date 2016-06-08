@@ -8,4 +8,4 @@ Check out the designated [frontend documentation](/client/docs/index.md).
 
 ## Backend
 
-Check out the designated [abckend documentation](/server/docs/index.md).
+Check out the designated [backend documentation](/server/docs/index.md).

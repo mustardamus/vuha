@@ -6,14 +6,8 @@ const Bulk = require('bulk-require')
 
 import App from './App.vue'
 
-import RequestMixin from './mixins/request.js'
-import CashMixin from './mixins/cash.js'
-
 Vue.use(VueRouter)
 Vue.use(VueForm)
-
-Vue.mixin(RequestMixin)
-Vue.mixin(CashMixin)
 
 const $root = Vue.extend(App)
 const router = new VueRouter()

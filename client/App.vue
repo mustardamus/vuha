@@ -10,11 +10,7 @@
 
 <template>
   <div id="app">
-    <nav-bar></nav-bar>
-    <router-view></router-view>
-
-    <loading-overlay-container></loading-overlay-container>
-    <notify-container></notify-container>
+    <layout></layout>
   </div>
 </template>
 
@@ -23,6 +19,7 @@ import _ from 'lodash'
 const Bulk = require('bulk-require')
 
 import State from './state.js'
+import RequestMixin from './mixins/request.js'
 import LogDataChangeMixin from './mixins/logDataChange.js'
 
 const actionsObj = Bulk(__dirname, [ 'actions/*.js']).actions
@@ -35,13 +32,8 @@ for (let actionKey in actionsObj) {
 export default {
   data () { return State },
   methods: actions,
-  mixins: [LogDataChangeMixin],
-
-  components: {
-    NavBar: require('./components/NavBar.vue'),
-    LoadingOverlayContainer: require('./containers/LoadingOverlayContainer.vue'),
-    NotifyContainer: require('./containers/NotifyContainer.vue')
-  },
+  mixins: [LogDataChangeMixin, RequestMixin],
+  components: { Layout: require('./components/Layout.vue') },
 
   ready () {
     if (process.env.NODE_ENV === 'development') {
