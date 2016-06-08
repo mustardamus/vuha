@@ -1,0 +1,14 @@
+## Stack
+
+* [Hapi.js](http://hapijs.com/api) - A rich framework for building applications and services
+* [Good](https://github.com/hapijs/good) - Hapi process monitoring
+* [Inert](https://github.com/hapijs/inert) - Static file and directory handlers for hapi.js
+* [Mongoose](http://mongoosejs.com/docs/guide.html) - elegant mongodb object modeling for node.js
+* [Lodash](https://lodash.com/docs) - A modern JavaScript utility library delivering modularity, performance, & extras
+* [Async](https://github.com/caolan/async) - Async utilities for node and the browser
+* [Request](https://github.com/request/request) - Simplified HTTP request client
+* [Ekso](https://github.com/mustardamus/ekso) - Require entire directory structures, modify the naming and initilization, and spit out an Object
+* [ESLint](https://github.com/eslint/eslint) - A fully pluggable tool for identifying and reporting on patterns in JavaScript
+* [StandardJS](http://standardjs.com/rules.html) - JavaScript Standard Style
+* [Forever](https://github.com/foreverjs/forever) - A simple CLI tool for ensuring that a given script runs continuously
+* [Mocha](https://mochajs.org/) - simple, flexible, fun javascript test framework
