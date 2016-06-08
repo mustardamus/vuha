@@ -3,12 +3,12 @@
 const Joi = require('joi')
 
 module.exports = {
-  'GET /users': AppController.index,
-  'GET /users/{id}': AppController.read,
-  'DELETE /users/{id}': AppController.delete,
+  'GET /users': UsersController.index,
+  'GET /users/{id}': UsersController.read,
+  'DELETE /users/{id}': UsersController.delete,
 
   'POST /users': {
-    handler: AppController.create,
+    handler: UsersController.create,
     config: {
       validate: {
         params: {
@@ -20,5 +20,5 @@ module.exports = {
     }
   },
 
-  'PUT /users/{id}': AppController.update
+  'PUT /users/{id}': UsersController.update
 }

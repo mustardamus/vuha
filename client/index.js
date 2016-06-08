@@ -3,7 +3,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueForm from 'vue-form'
 const Bulk = require('bulk-require')
-
 import App from './App.vue'
 
 Vue.use(VueRouter)
