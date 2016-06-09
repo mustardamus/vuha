@@ -71,12 +71,15 @@ server.register(pluginsArr, (err) => {
     for (let routePath in ekso.Routes[routeName]) {
       let routeArr = routePath.split(' ')
       let handler = ekso.Routes[routeName][routePath]
-      let config = {}
+      let config = { auth: false }
       let chalkRoute = Chalk.yellow('(' + routeName + ') ' + routePath)
 
       if (!_.isFunction(handler) && _.isObject(handler)) {
+        if (handler.config) {
+          config = handler.config
+        }
+
         handler = handler.handler
-        config = handler.config
       }
 
       if (!handler) {

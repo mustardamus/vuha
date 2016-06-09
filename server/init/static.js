@@ -8,6 +8,9 @@ module.exports = function (server) {
         redirectToSlash: true,
         index: true
       }
+    },
+    config: {
+      auth: false
     }
   })
 }

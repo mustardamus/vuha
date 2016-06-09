@@ -19,6 +19,9 @@ module.exports = {
         return reply(err)
       }
 
+      // TODO return user object (remove password field) and signed token
+      console.log(user, Helpers.jwt.sign(user._id));
+
       reply(user)
     })
   },

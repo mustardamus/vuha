@@ -9,7 +9,12 @@
     "server_port": 9992
   },
   "browserify": {
-    "transform": ["vueify", "babelify", "envify", "bulkify"]
+    "transform": [
+      "vueify",
+      "babelify",
+      "envify",
+      "bulkify"
+    ]
   },
   "scripts": {
     "client-clean": "rm -rf ./public && mkdir public",
@@ -39,7 +44,9 @@
     "good": "^6.6.0",
     "good-console": "^5.3.1",
     "hapi": "^13.3.0",
+    "hapi-auth-jwt2": "^7.0.1",
     "inert": "^3.2.0",
+    "jsonwebtoken": "^7.0.0",
     "lodash": "^4.11.1",
     "mongoose": "^4.4.12",
     "request": "^2.72.0",

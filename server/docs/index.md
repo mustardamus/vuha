@@ -3,6 +3,8 @@
 * [Hapi.js](http://hapijs.com/api) - A rich framework for building applications and services
 * [Good](https://github.com/hapijs/good) - Hapi process monitoring
 * [Inert](https://github.com/hapijs/inert) - Static file and directory handlers for hapi.js
+* [hapi-auth-jwt2](https://github.com/dwyl/hapi-auth-jwt2) - Secure Hapi.js authentication plugin using JSON Web Tokens (JWT)
+* [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) - JsonWebToken implementation for node.js
 * [Mongoose](http://mongoosejs.com/docs/guide.html) - elegant mongodb object modeling for node.js
 * [Lodash](https://lodash.com/docs) - A modern JavaScript utility library delivering modularity, performance, & extras
 * [Async](https://github.com/caolan/async) - Async utilities for node and the browser

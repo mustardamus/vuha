@@ -3,15 +3,22 @@
 const Joi = require('joi')
 
 module.exports = {
-  'GET /users': UsersController.index,
+  'GET /users': {
+    handler: UsersController.index,
+    config: {
+      auth: 'jwt'
+    }
+  },
+
   'GET /users/{id}': UsersController.read,
   'DELETE /users/{id}': UsersController.delete,
 
   'POST /users': {
     handler: UsersController.create,
     config: {
+      auth: false,
       validate: {
-        params: {
+        query: {
           username: Joi.string().required().alphanum(),
           email: Joi.string().required().email(),
           password: Joi.string().required().min(6)
