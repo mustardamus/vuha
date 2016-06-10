@@ -8,9 +8,15 @@ export default {
         query = {}
       }
 
+      let headers = { Accept: 'application/json' }
+      let token = this.$root.getUserToken()
+
+      if (token) {
+        headers.Authorization = token
+      }
+
       superagent[verb]('/' + url)
-        .set('Accept', 'application/json')
-        .set('Authorization', 'eyJhbGciOiJIUzI1NiJ9.aWQ.kh21pp6WoA3w0taou9dUy4lvOAkfzp2otuIsFR19jvI') // TODO replace me with real one
+        .set(headers)
         .query(query)
         .end((err, response) => {
           if (err) {
