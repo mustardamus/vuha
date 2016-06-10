@@ -64,5 +64,9 @@ module.exports = {
 
       return token
     }
+  },
+
+  loginUser (data) {
+    console.log('login user', data);
   }
 }
