@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "async": "^2.0.0-rc.3",
+    "boom": "^3.2.1",
     "bulma": "0.0.21",
     "cash-dom": "^1.2.0",
     "chalk": "^1.1.3",

@@ -69,7 +69,7 @@ import CashMixin from '../mixins/cash.js'
 
 export default {
   mixins: [CashMixin],
-  
+
   props: {
     username: String,
     email: String,
@@ -85,6 +85,12 @@ export default {
 
   ready () {
     this.$('form input').get(0).focus()
+
+    // lazy mens testing
+    this.username = 'test'
+    this.email = 'test@email.com'
+    this.password = '123456'
+    this.passwordCheck = '123456'
   },
 
   methods: {

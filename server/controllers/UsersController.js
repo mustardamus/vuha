@@ -12,18 +12,32 @@ module.exports = {
   },
 
   create (request, reply) {
-    let user = new User(request.query)
-
-    user.save((err) => {
+    User.count({ username: request.query.username }, (err, count) => {
       if (err) {
-        return reply(err)
+        reply(Helpers.boom.badImplementation('Counting username'))
+        return
       }
 
-      // TODO return user object (remove password field) and signed token
-      console.log(user, Helpers.jwt.sign(user._id));
+      if (count !== 0) {
+        reply(Helpers.boom.preconditionFailed('Username already exists'))
+        return
+      }
 
-      reply(user)
+      let user = new User(request.query)
+
+      user.save((err) => {
+        if (err) {
+          return reply(err)
+        }
+
+        // TODO return user object (remove password field) and signed token
+        console.log(user, Helpers.jwt.sign(user._id));
+
+        reply(user)
+      })
     })
+
+
   },
 
   read (request, reply) {

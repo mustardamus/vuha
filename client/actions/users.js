@@ -23,7 +23,7 @@ module.exports = {
     // TODO handle jwt (trigger action that stores it in localStorage)
     this.$request('post', 'users', data, (err, res) => {
       if (err) {
-        this.$root.addNotifyMessage('danger', 'Can create user')
+        this.$root.addNotifyError(err)
       } else {
         this.$root.user = res
       }
