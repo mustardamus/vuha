@@ -44,15 +44,15 @@ module.exports = {
             return
           }
 
-          // TODO return user object (remove password field) and signed token
-          console.log(user, Helpers.jwt.sign(user._id));
+          delete user.password
 
-          reply(user)
+          reply({
+            user: user,
+            token: Helpers.jwt.sign(user._id)
+          })
         })
       })
     })
-
-
   },
 
   read (request, reply) {

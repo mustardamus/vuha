@@ -20,12 +20,12 @@ module.exports = {
   },
 
   createUser (data) {
-    // TODO handle jwt (trigger action that stores it in localStorage)
     this.$request('post', 'users', data, (err, res) => {
       if (err) {
         this.$root.addNotifyError(err)
       } else {
-        this.$root.user = res
+        this.$root.user = res.user
+        this.$root.setUserToken(res.token)
       }
     })
   },
@@ -48,5 +48,21 @@ module.exports = {
         this.$root.getUsers()
       }
     })
+  },
+
+  setUserToken (token) {
+    this.$root.token = token
+    localStorage.setItem('token', token)
+  },
+
+  getUserToken () {
+    if (this.$root.token) {
+      return this.$root.token
+    } else {
+      let token = localStorage.getItem('token')
+      this.$root.token = token
+
+      return token
+    }
   }
 }

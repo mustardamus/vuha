@@ -1,6 +1,7 @@
 export default {
-  users: [],
-  user: {},
-  isLoading: false,
-  notifyMessages: []
+  users: [],          // only for testing, remove me
+  user: {},           // stores the logged in user information
+  token: false,       // stores the token of the logged in user
+  isLoading: false,   // indicate if (ajax) is loading
+  notifyMessages: []  // temporarely store global notify messages
 }
