@@ -12,7 +12,9 @@ module.exports = {
   },
 
   create (request, reply) {
-    User.count({ username: request.query.username }, (err, count) => {
+    const query = request.query
+
+    User.count({ username: query.username }, (err, count) => {
       if (err) {
         reply(Helpers.boom.badImplementation('Counting username'))
         return
@@ -23,17 +25,30 @@ module.exports = {
         return
       }
 
-      let user = new User(request.query)
-
-      user.save((err) => {
+      User.count({ email: query.email }, (err, count) => {
         if (err) {
-          return reply(err)
+          reply(Helpers.boom.badImplementation('Counting email'))
+          return
         }
 
-        // TODO return user object (remove password field) and signed token
-        console.log(user, Helpers.jwt.sign(user._id));
+        if (count !== 0) {
+          reply(Helpers.boom.preconditionFailed('E-Mail already exists'))
+          return
+        }
 
-        reply(user)
+        let user = new User(query)
+
+        user.save((err) => {
+          if (err) {
+            reply(Helpers.boom.badImplementation('Creating user'))
+            return
+          }
+
+          // TODO return user object (remove password field) and signed token
+          console.log(user, Helpers.jwt.sign(user._id));
+
+          reply(user)
+        })
       })
     })
 

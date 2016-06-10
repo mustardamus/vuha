@@ -11,5 +11,11 @@ module.exports = function (mongoose) {
     timestamps: true
   })
 
+  schema.pre('save', function (next) {
+    let salt = Helpers.bcrypt.genSaltSync(Config.auth.bcrypt.saltRounds)
+    this.password = Helpers.bcrypt.hashSync(this.password, salt)
+    next()
+  })
+
   return mongoose.model(name, schema)
 }

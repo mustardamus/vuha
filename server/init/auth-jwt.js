@@ -1,8 +1,8 @@
 module.exports = function (server) {
   const opt = {
-    key: Config.auth.secret,
+    key: Config.auth.jwt.secret,
     validateFunc: Helpers.authenticate,
-    verifyOptions: Config.auth.options
+    verifyOptions: Config.auth.jwt.options
   }
 
   server.auth.strategy('jwt', 'jwt', opt)
