@@ -1,5 +1,15 @@
-module.exports = function (decoded, request, cb) {
-  // TODO implement the real function
-  console.log('authenticate function called')
-  return cb(null, true)
+'use strict'
+
+module.exports = function (userId, request, cb) {
+  User.findOne({ _id: userId }, (err, user) => {
+    if (err) {
+      return cb(null, false)
+    }
+
+    if (user) {
+      return cb(null, true)
+    } else {
+      return cb(null, false)
+    }
+  })
 }

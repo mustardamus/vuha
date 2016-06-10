@@ -12,9 +12,7 @@ module.exports = {
   },
 
   create (request, reply) {
-    const query = request.query
-
-    User.count({ username: query.username }, (err, count) => {
+    User.count({ username: request.query.username }, (err, count) => {
       if (err) {
         reply(Helpers.boom.badImplementation('Counting username'))
         return
@@ -25,7 +23,7 @@ module.exports = {
         return
       }
 
-      User.count({ email: query.email }, (err, count) => {
+      User.count({ email: request.query.email }, (err, count) => {
         if (err) {
           reply(Helpers.boom.badImplementation('Counting email'))
           return
@@ -36,7 +34,7 @@ module.exports = {
           return
         }
 
-        let user = new User(query)
+        let user = new User(request.query)
 
         user.save((err) => {
           if (err) {
@@ -48,7 +46,7 @@ module.exports = {
 
           reply({
             user: user,
-            token: Helpers.jwt.sign(user._id)
+            token: Helpers.jwt.sign(_.toString(user._id))
           })
         })
       })
