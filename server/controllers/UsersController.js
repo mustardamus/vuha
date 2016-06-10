@@ -44,7 +44,7 @@ module.exports = {
             return
           }
 
-          delete user.password
+          user.password = undefined
 
           reply({
             user: user,
