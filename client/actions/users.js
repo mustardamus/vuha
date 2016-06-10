@@ -25,7 +25,9 @@ module.exports = {
         this.$root.addNotifyError(err)
       } else {
         this.$root.user = res.user
+        
         this.$root.setUserToken(res.token)
+        this.$root.redirectAfterLogin()
       }
     })
   },
@@ -56,10 +58,12 @@ module.exports = {
   },
 
   getUserToken () {
-    if (this.$root.token) {
-      return this.$root.token
+    let token = this.$root.token
+
+    if (token) {
+      return token
     } else {
-      let token = localStorage.getItem('token')
+      token = localStorage.getItem('token')
       this.$root.token = token
 
       return token
@@ -77,12 +81,21 @@ module.exports = {
         this.$root.addNotifyError(err)
       } else {
         this.$root.user = res.user
+
         this.$root.setUserToken(res.token)
+        this.$root.redirectAfterLogin()
       }
     })
   },
 
   logoutUser () {
     this.$root.removeUserToken()
+    this.$root.addNotifyMessage('success', 'Bye ' + this.$root.user.username + '!')
+    this.$router.go({ name: 'home' })
+  },
+
+  redirectAfterLogin () {
+    this.$root.addNotifyMessage('success', 'Hello ' + this.$root.user.username + '!')
+    this.$router.go({ name: 'home' })
   }
 }
