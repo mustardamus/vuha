@@ -25,7 +25,7 @@ module.exports = {
         this.$root.addNotifyError(err)
       } else {
         this.$root.user = res.user
-        
+
         this.$root.setUserToken(res.token)
         this.$root.redirectAfterLogin()
       }
