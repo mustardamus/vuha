@@ -55,7 +55,11 @@ let pluginsArr = []
 server.connection(Config.connection)
 
 for (let pluginName in ekso.Plugins) {
-  pluginsArr.push(ekso.Plugins[pluginName])
+  let plugin = ekso.Plugins[pluginName]
+
+  if (plugin.register) {
+    pluginsArr.push(plugin)
+  }
 }
 
 server.register(pluginsArr, (err) => {
