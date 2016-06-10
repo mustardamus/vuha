@@ -19,7 +19,7 @@ export default {
   },
 
   ready () {
-  
+
   },
 
   methods: {
