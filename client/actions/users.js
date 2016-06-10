@@ -67,6 +67,13 @@ module.exports = {
   },
 
   loginUser (data) {
-    console.log('login user', data);
+    this.$request('post', 'login', data, (err, res) => {
+      if (err) {
+        this.$root.addNotifyError(err)
+      } else {
+        this.$root.user = res.user
+        this.$root.setUserToken(res.token)
+      }
+    })
   }
 }

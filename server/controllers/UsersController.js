@@ -90,5 +90,29 @@ module.exports = {
 
       reply({ success: true })
     })
+  },
+
+  login (request, reply) {
+    User.findOne({ username: request.query.username }, (err, user) => {
+      if (err) {
+        reply(Helpers.boom.badImplementation('Find user'))
+        return
+      }
+
+      if (user) {
+        if (user.validatePassword(request.query.password)) {
+          user.password = undefined
+
+          reply({
+            user: user,
+            token: Helpers.jwt.sign(_.toString(user._id))
+          })
+        } else {
+          reply(Helpers.boom.preconditionFailed('Password does not match'))
+        }
+      } else {
+        reply(Helpers.boom.preconditionFailed('Username not found'))
+      }
+    })
   }
 }

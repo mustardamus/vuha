@@ -17,5 +17,9 @@ module.exports = function (mongoose) {
     next()
   })
 
+  schema.methods.validatePassword = function (password) {
+    return Helpers.bcrypt.compareSync(password, this.password)
+  }
+
   return mongoose.model(name, schema)
 }

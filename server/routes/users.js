@@ -27,5 +27,18 @@ module.exports = {
     }
   },
 
-  'PUT /users/{id}': UsersController.update
+  'PUT /users/{id}': UsersController.update,
+
+  'POST /login': {
+    handler: UsersController.login,
+    config: {
+      auth: false,
+      validate: {
+        query: {
+          username: Joi.string().required(),
+          password: Joi.string().required()
+        }
+      }
+    }
+  }
 }

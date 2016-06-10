@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function (userId, request, cb) {
-  User.findOne({ _id: userId }, (err, user) => {
+  User.findById(userId, (err, user) => {
     if (err) {
       return cb(null, false)
     }
