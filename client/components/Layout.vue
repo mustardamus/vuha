@@ -3,7 +3,7 @@
 </style>
 
 <template>
-  <nav-bar></nav-bar>
+  <nav-bar-container></nav-bar-container>
   <router-view></router-view>
 
   <loading-overlay-container></loading-overlay-container>
@@ -13,7 +13,7 @@
 <script>
 export default {
   components: {
-    NavBar: require('../components/NavBar.vue'),
+    NavBarContainer: require('../containers/NavBarContainer.vue'),
     LoadingOverlayContainer: require('../containers/LoadingOverlayContainer.vue'),
     NotifyContainer: require('../containers/NotifyContainer.vue')
   }

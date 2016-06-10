@@ -20,34 +20,35 @@
     </div>
 
     <div class="navbar-right">
-      <p class="navbar-item">
-        <a v-link="{ name: 'register' }">Register</a>
-      </p>
-      <p class="navbar-item">
-        <a v-link="{ name: 'login' }">Login</a>
-      </p>
+      <template v-if="!loggedIn">
+        <p class="navbar-item">
+          <a v-link="{ name: 'register' }">Register</a>
+        </p>
+        <p class="navbar-item">
+          <a v-link="{ name: 'login' }">Login</a>
+        </p>
+      </template>
+
+      <template v-if="loggedIn">
+        <p class="navbar-item">
+          <a @click="onLogoutClick">Logout</a>
+        </p>
+      </template>
     </div>
   </nav>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-
-    }
-  },
-
-  components: {
-
-  },
-
-  ready () {
-
+  props: {
+    loggedIn: Boolean,
+    default: false
   },
 
   methods: {
-
+    onLogoutClick () {
+      this.$emit('logout')
+    }
   }
 }
 </script>

@@ -66,6 +66,11 @@ module.exports = {
     }
   },
 
+  removeUserToken () {
+    localStorage.removeItem('token')
+    this.$root.token = false
+  },
+
   loginUser (data) {
     this.$request('post', 'login', data, (err, res) => {
       if (err) {
@@ -75,5 +80,9 @@ module.exports = {
         this.$root.setUserToken(res.token)
       }
     })
+  },
+
+  logoutUser () {
+    this.$root.removeUserToken()
   }
 }
