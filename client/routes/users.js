@@ -17,5 +17,10 @@ module.exports = {
   '/login': {
     name: 'login',
     component: require('../pages/Login.vue')
+  },
+
+  '/profile': {
+    name: 'profile',
+    component: require('../pages/Profile.vue')
   }
 }

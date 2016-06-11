@@ -31,6 +31,9 @@
 
       <template v-if="loggedIn">
         <p class="navbar-item">
+          <a v-link="{ name: 'profile' }">Profile</a>
+        </p>
+        <p class="navbar-item">
           <a @click="onLogoutClick">Logout</a>
         </p>
       </template>
