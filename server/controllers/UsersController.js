@@ -157,6 +157,10 @@ module.exports = {
         user.email = query.email
 
         user.save((err) => {
+          if (err) {
+            return reply(Helpers.boom.badImplementation('User not saved'))
+          }
+
           user.password = undefined
           reply(user)
         })
