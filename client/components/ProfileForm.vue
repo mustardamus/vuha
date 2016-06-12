@@ -29,7 +29,9 @@
           'is-danger': validation.email.$invalid && validation.$submitted
         }"
       >
-      <span class="help is-danger" v-if="validation.email.$invalid && validation.$submitted">
+      <span class="help is-danger"
+        v-if="validation.email.$invalid && validation.$submitted"
+      >
         <template v-if="validation.email.$error.required">
           E-Mail address is required
         </template>
@@ -41,8 +43,8 @@
 
     <label class="label" for="old-password">Old Password</label>
     <p class="control">
-      <input id="old-password" type="password" name="oldPassword" placeholder="********"
-        v-model="oldPassword"
+      <input id="old-password" type="password" name="oldPassword"
+        placeholder="********" v-model="oldPassword"
         :class="{
           input: true,
           'is-danger': isOldPasswordSet && !isNewPasswordSet && validation.$submitted
@@ -80,8 +82,9 @@
 
     <label class="label" for="passwordCheck">New Password Confirmation</label>
     <p class="control">
-      <input id="passwordCheck" type="password" name="passwordCheck" placeholder="********"
-        v-form-ctrl custom-validator="passwordCheckConfirmation" v-model="passwordCheck"
+      <input id="passwordCheck" type="password" name="passwordCheck"
+        placeholder="********" v-form-ctrl
+        custom-validator="passwordCheckConfirmation" v-model="passwordCheck"
         :class="{
           input: true,
           'is-danger': (!isPasswordConfirmationSet || validation.passwordCheck.$invalid) && validation.$submitted
