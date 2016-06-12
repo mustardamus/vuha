@@ -7,10 +7,15 @@
     <label class="label" for="username">Username</label>
     <p class="control">
       <input id="username" type="text" name="username" placeholder="Username"
-        :class="{ input: true, 'is-danger': validation.username.$invalid && validation.$submitted }"
         v-form-ctrl required v-model="username"
+        :class="{
+          input: true,
+          'is-danger': validation.username.$invalid && validation.$submitted
+        }"
       >
-      <span class="help is-danger" v-if="validation.username.$invalid && validation.$submitted">
+      <span class="help is-danger"
+        v-if="validation.username.$invalid && validation.$submitted"
+      >
         Username is required
       </span>
     </p>
@@ -18,8 +23,11 @@
     <label class="label" for="email">E-Mail</label>
     <p class="control">
       <input id="email" type="email" name="email" placeholder="your@email.com"
-        :class="{ input: true, 'is-danger': validation.email.$invalid && validation.$submitted }"
         v-form-ctrl required v-model="email"
+        :class="{
+          input: true,
+          'is-danger': validation.email.$invalid && validation.$submitted
+        }"
       >
       <span class="help is-danger" v-if="validation.email.$invalid && validation.$submitted">
         <template v-if="validation.email.$error.required">
@@ -34,23 +42,35 @@
     <label class="label" for="old-password">Old Password</label>
     <p class="control">
       <input id="old-password" type="password" name="oldPassword" placeholder="********"
-        :class="{ input: true, 'is-danger': validation.password.$invalid && validation.$submitted }"
-        v-form-ctrl required minlength="6" v-model="oldPassword"
+        v-model="oldPassword"
+        :class="{
+          input: true,
+          'is-danger': isOldPasswordSet && !isNewPasswordSet && validation.$submitted
+        }"
       >
-      <span class="help is-danger" v-if="validation.password.$invalid && validation.$submitted">
-        Please provide your old Password to change to a new one
+      <span :class="{
+        help: true,
+        'is-danger': isOldPasswordSet && !isNewPasswordSet && validation.$submitted
+      }">
+        Please provide your old Password to change to a new one, leave blank if
+        you don't want to change it
       </span>
     </p>
 
     <label class="label" for="password">New Password</label>
     <p class="control">
       <input id="password" type="password" name="password" placeholder="********"
-        :class="{ input: true, 'is-danger': validation.password.$invalid && validation.$submitted }"
-        v-form-ctrl required minlength="6" v-model="password"
+        v-form-ctrl minlength="6" v-model="password"
+        :class="{
+          input: true,
+          'is-danger': ((!isOldPasswordSet && isNewPasswordSet) || validation.password.$invalid) && validation.$submitted
+        }"
       >
-      <span class="help is-danger" v-if="validation.password.$invalid && validation.$submitted">
-        <template v-if="validation.password.$error.required">
-          Password is required
+      <span class="help is-danger"
+        v-if="((!isOldPasswordSet && isNewPasswordSet) || validation.password.$invalid) && validation.$submitted"
+      >
+        <template v-if="!isOldPasswordSet && isNewPasswordSet">
+          Please provide your old Password
         </template>
         <template v-if="validation.password.$error.minlength">
           Password must be at least 6 characters long
@@ -61,10 +81,15 @@
     <label class="label" for="passwordCheck">New Password Confirmation</label>
     <p class="control">
       <input id="passwordCheck" type="password" name="passwordCheck" placeholder="********"
-        :class="{ input: true, 'is-danger': validation.passwordCheck.$invalid && validation.$submitted }"
-        v-form-ctrl required custom-validator="passwordCheckConfirmation" v-model="passwordCheck"
+        v-form-ctrl custom-validator="passwordCheckConfirmation" v-model="passwordCheck"
+        :class="{
+          input: true,
+          'is-danger': (!isPasswordConfirmationSet || validation.passwordCheck.$invalid) && validation.$submitted
+        }"
       >
-      <span class="help is-danger" v-if="validation.passwordCheck.$invalid && validation.$submitted">
+      <span class="help is-danger"
+        v-if="(!isPasswordConfirmationSet || validation.passwordCheck.$invalid) && validation.$submitted"
+      >
         Password confirmation must match
       </span>
     </p>
@@ -83,15 +108,47 @@ export default {
 
   props: {
     username: String,
-    email: String,
-    password: String,
-    oldPassword: String
+    email: String
   },
 
   data () {
     return {
       validation: null,
-      passwordCheck: ''
+      password: '',
+      oldPassword: '',
+      passwordCheck: '',
+    }
+  },
+
+  computed: {
+    isOldPasswordSet () {
+      return this.oldPassword.length
+    },
+
+    isNewPasswordSet () {
+      return this.password.length
+    },
+
+    isPasswordConfirmationSet () {
+      return this.passwordCheckConfirmation(this.passwordCheck)
+    },
+
+    isFormValid () {
+      let valid = true
+
+      if (this.isOldPasswordSet && !this.isNewPasswordSet) {
+        valid = false
+      }
+
+      if (!this.isOldPasswordSet && this.isNewPasswordSet) {
+        valid = false
+      }
+
+      if (this.isOldPasswordSet && (this.password !== this.passwordCheck)) {
+        valid = false
+      }
+
+      return (valid && this.validation.$valid)
     }
   },
 
@@ -101,14 +158,20 @@ export default {
 
   methods: {
     onSubmit () {
-      if (this.validation.$valid) {
-        this.$emit('data', {
+      if (this.isFormValid) {
+        let data = {
           username: this.username,
-          email: this.email,
-          password: this.password
-        })
+          email: this.email
+        }
+
+        if (this.oldPassword.length) {
+          data.password = this.password
+          data.oldPassword = this.oldPassword
+        }
+
+        this.$emit('data', data)
       } else {
-        this.$('form .vf-invalid').get(0).focus()
+        this.$('input.is-danger').get(0).focus()
       }
     },
 
