@@ -19,12 +19,23 @@ module.exports = {
     })
   },
 
-  getCurrentUser (userId) {
+  getCurrentUser () {
     this.$request('get', 'current_user', (err, res) => {
       if (err) {
         this.$root.addNotifyError(err)
       } else {
         this.$root.user = res
+      }
+    })
+  },
+
+  updateCurrentUser (data) {
+    this.$request('put', 'current_user', data, (err, res) => {
+      if (err) {
+        this.$root.addNotifyError(err)
+      } else {
+        this.$root.user = res
+        this.$root.addNotifyMessage('success', 'Updated successfully')
       }
     })
   },

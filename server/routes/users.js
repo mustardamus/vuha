@@ -45,5 +45,19 @@ module.exports = {
   'GET /current_user': {
     handler: UsersController.getCurrentUser,
     config: { auth: 'jwt' }
+  },
+
+  'PUT /current_user': {
+    handler: UsersController.updateCurrentUser,
+    config: {
+      auth: 'jwt',
+      validate: {
+        query: {
+          username: Joi.string().required().alphanum(),
+          email: Joi.string().required().email(),
+          password: Joi.string().min(6)
+        }
+      }
+    }
   }
 }

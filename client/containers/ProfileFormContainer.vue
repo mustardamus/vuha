@@ -34,8 +34,7 @@ export default {
     },
 
     onData (data) {
-      //this.$root.createUser(data)
-      console.log('update user', data);
+      this.$root.updateCurrentUser(data)
     }
   }
 }

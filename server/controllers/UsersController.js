@@ -118,11 +118,49 @@ module.exports = {
   getCurrentUser (request, reply) {
     let user = request.auth.credentials
 
-    if (request.auth.isAuthenticated && user) {
+    if (user) {
       user.password = undefined
       reply(user)
     } else {
-      reply(Helpers.boom.preconditionFailed('Username not found'))
+      reply(Helpers.boom.preconditionFailed('Credentials not found'))
     }
+  },
+
+  updateCurrentUser (request, reply) {
+    let user = request.auth.credentials
+    let query = request.query
+
+    if (!user) {
+      return reply(Helpers.boom.preconditionFailed('Credentials not found'))
+    }
+
+    User.count({ username: query.username }, (err, count) => {
+      if (err) {
+        return reply(Helpers.boom.badImplementation('Count username'))
+      }
+
+      if (user.username !== query.username && count !== 0) {
+        return reply(Helpers.boom.preconditionFailed('Username already exists'))
+      }
+
+      user.username = query.username
+
+      User.count({ email: query.email }, (err, count) => {
+        if (err) {
+          return reply(Helpers.boom.badImplementation('Count email'))
+        }
+
+        if (user.email !== query.email && count !== 0) {
+          return reply(Helpers.boom.preconditionFailed('E-Mail already exists'))
+        }
+
+        user.email = query.email
+
+        user.save((err) => {
+          user.password = undefined
+          reply(user)
+        })
+      })
+    })
   }
 }
