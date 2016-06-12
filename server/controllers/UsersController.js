@@ -116,28 +116,13 @@ module.exports = {
   },
 
   getCurrentUser (request, reply) {
-    let token = request.headers.authorization
+    let user = request.auth.credentials
 
-    if (!token) {
-      return reply(Helpers.boom.preconditionFailed('Token not provided'))
+    if (request.auth.isAuthenticated && user) {
+      user.password = undefined
+      reply(user)
+    } else {
+      reply(Helpers.boom.preconditionFailed('Username not found'))
     }
-
-    let userId = Helpers.jwt.verify(token)
-
-    if (!userId) {
-      return reply(Helpers.boom.preconditionFailed('Could not verify token'))
-    }
-
-    User.findById(userId, (err, user) => {
-      if (err) {
-        return reply(Helpers.boom.badImplementation('Find user'))
-      }
-
-      if (user) {
-        reply(user)
-      } else {
-        reply(Helpers.boom.preconditionFailed('User not found'))
-      }
-    })
   }
 }

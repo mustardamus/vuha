@@ -7,7 +7,7 @@ module.exports = function (userId, request, cb) {
     }
 
     if (user) {
-      return cb(null, true)
+      return cb(null, true, user)
     } else {
       return cb(null, false)
     }

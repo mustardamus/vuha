@@ -42,5 +42,8 @@ module.exports = {
     }
   },
 
-  'GET /current_user': UsersController.getCurrentUser
+  'GET /current_user': {
+    handler: UsersController.getCurrentUser,
+    config: { auth: 'jwt' }
+  }
 }
