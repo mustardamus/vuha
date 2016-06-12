@@ -19,6 +19,16 @@ module.exports = {
     })
   },
 
+  getCurrentUser (userId) {
+    this.$request('get', 'current_user', (err, res) => {
+      if (err) {
+        this.$root.addNotifyError(err)
+      } else {
+        this.$root.user = res
+      }
+    })
+  },
+
   createUser (data) {
     this.$request('post', 'users', data, (err, res) => {
       if (err) {

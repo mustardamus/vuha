@@ -40,5 +40,7 @@ module.exports = {
         }
       }
     }
-  }
+  },
+
+  'GET /current_user': UsersController.getCurrentUser
 }
