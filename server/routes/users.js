@@ -55,7 +55,8 @@ module.exports = {
         query: {
           username: Joi.string().required().alphanum(),
           email: Joi.string().required().email(),
-          password: Joi.string().min(6)
+          password: Joi.string().min(6),
+          oldPassword: Joi.string()
         }
       }
     }

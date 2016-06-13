@@ -169,6 +169,14 @@ module.exports = {
       user.username = query.username
       user.email = query.email
 
+      if (query.password && query.oldPassword) {
+        if (Helpers.bcrypt.compare(query.oldPassword, user.password)) {
+          user.password = Helpers.bcrypt.hash(query.password)
+        } else {
+          return reply(Helpers.boom.preconditionFailed('Password does not match'))
+        }
+      }
+
       user.save((err) => {
         if (err) {
           return reply(Helpers.boom.badImplementation('User not saved'))
