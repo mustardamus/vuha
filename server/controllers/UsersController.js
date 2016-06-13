@@ -12,7 +12,9 @@ module.exports = {
   },
 
   create (request, reply) {
-    User.count({ username: request.query.username }, (err, count) => {
+    let query = request.query
+
+    User.count({ username: query.username }, (err, count) => {
       if (err) {
         reply(Helpers.boom.badImplementation('Counting username'))
         return
@@ -23,7 +25,7 @@ module.exports = {
         return
       }
 
-      User.count({ email: request.query.email }, (err, count) => {
+      User.count({ email: query.email }, (err, count) => {
         if (err) {
           reply(Helpers.boom.badImplementation('Counting email'))
           return
@@ -34,7 +36,8 @@ module.exports = {
           return
         }
 
-        let user = new User(request.query)
+        let user = new User(query)
+        user.password = Helpers.bcrypt.hash(query.password)
 
         user.save((err) => {
           if (err) {
@@ -160,6 +163,10 @@ module.exports = {
           if (err) {
             return reply(Helpers.boom.badImplementation('User not saved'))
           }
+
+          // TODO because of pre save in the User model
+          // password is encrypet again, thus breaks it
+          // so do the hashing here in the user controller boo
 
           user.password = undefined
           reply(user)
