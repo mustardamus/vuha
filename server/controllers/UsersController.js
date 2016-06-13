@@ -1,5 +1,37 @@
 'use strict'
 
+const doesUserExist = function (user, currentUser, cb) {
+  if (_.isFunction(currentUser)) {
+    cb = currentUser
+    currentUser = {
+      username: '',
+      email: ''
+    }
+  }
+
+  User.count({ username: user.username }, (err, count) => {
+    if (err) {
+      return cb(Helpers.boom.badImplementation('Counting username'))
+    }
+
+    if (user.username !== currentUser.username && count !== 0) {
+      return cb(null, true, Helpers.boom.preconditionFailed('Username already exists'))
+    }
+
+    User.count({ email: user.email }, (err, count) => {
+      if (err) {
+        return cb(Helpers.boom.badImplementation('Counting email'))
+      }
+
+      if (user.email !== currentUser.email && count !== 0) {
+        cb(null, true, Helpers.boom.preconditionFailed('E-Mail already exists'))
+      } else {
+        cb(null, false)
+      }
+    })
+  })
+}
+
 module.exports = {
   index (request, reply) {
     User.find((err, users) => {
@@ -14,43 +46,31 @@ module.exports = {
   create (request, reply) {
     let query = request.query
 
-    User.count({ username: query.username }, (err, count) => {
+    doesUserExist(query, (err, exists, msg) => {
       if (err) {
-        reply(Helpers.boom.badImplementation('Counting username'))
-        return
+        return reply(err)
       }
 
-      if (count !== 0) {
-        reply(Helpers.boom.preconditionFailed('Username already exists'))
-        return
+      if (exists) {
+        return reply(msg)
       }
 
-      User.count({ email: query.email }, (err, count) => {
+      let user = new User
+
+      user.username = query.username
+      user.email = query.email
+      user.password = Helpers.bcrypt.hash(query.password)
+
+      user.save((err) => {
         if (err) {
-          reply(Helpers.boom.badImplementation('Counting email'))
-          return
+          return reply(Helpers.boom.badImplementation('Creating user'))
         }
 
-        if (count !== 0) {
-          reply(Helpers.boom.preconditionFailed('E-Mail already exists'))
-          return
-        }
+        user.password = undefined
 
-        let user = new User(query)
-        user.password = Helpers.bcrypt.hash(query.password)
-
-        user.save((err) => {
-          if (err) {
-            reply(Helpers.boom.badImplementation('Creating user'))
-            return
-          }
-
-          user.password = undefined
-
-          reply({
-            user: user,
-            token: Helpers.jwt.sign(_.toString(user._id))
-          })
+        reply({
+          user: user,
+          token: Helpers.jwt.sign(_.toString(user._id))
         })
       })
     })
@@ -137,40 +157,25 @@ module.exports = {
       return reply(Helpers.boom.preconditionFailed('Credentials not found'))
     }
 
-    User.count({ username: query.username }, (err, count) => {
+    doesUserExist(query, user, (err, exists, msg) => {
       if (err) {
-        return reply(Helpers.boom.badImplementation('Count username'))
+        return reply(err)
       }
 
-      if (user.username !== query.username && count !== 0) {
-        return reply(Helpers.boom.preconditionFailed('Username already exists'))
+      if (exists) {
+        return reply(msg)
       }
 
       user.username = query.username
+      user.email = query.email
 
-      User.count({ email: query.email }, (err, count) => {
+      user.save((err) => {
         if (err) {
-          return reply(Helpers.boom.badImplementation('Count email'))
+          return reply(Helpers.boom.badImplementation('User not saved'))
         }
 
-        if (user.email !== query.email && count !== 0) {
-          return reply(Helpers.boom.preconditionFailed('E-Mail already exists'))
-        }
-
-        user.email = query.email
-
-        user.save((err) => {
-          if (err) {
-            return reply(Helpers.boom.badImplementation('User not saved'))
-          }
-
-          // TODO because of pre save in the User model
-          // password is encrypet again, thus breaks it
-          // so do the hashing here in the user controller boo
-
-          user.password = undefined
-          reply(user)
-        })
+        user.password = undefined
+        reply(user)
       })
     })
   }
