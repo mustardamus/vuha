@@ -7,6 +7,7 @@
 * [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) - JsonWebToken implementation for node.js
 * [Bcrypt](https://github.com/ncb000gt/node.bcrypt.js/) - bcrypt for NodeJs
 * [Boom](https://github.com/hapijs/boom) - HTTP-friendly error objects
+* [hapi-authorization](https://github.com/toymachiner62/hapi-authorization) - ACL plugin for hapijs
 * [Mongoose](http://mongoosejs.com/docs/guide.html) - elegant mongodb object modeling for node.js
 * [Lodash](https://lodash.com/docs) - A modern JavaScript utility library delivering modularity, performance, & extras
 * [Async](https://github.com/caolan/async) - Async utilities for node and the browser

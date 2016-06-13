@@ -6,7 +6,10 @@ module.exports = {
   'GET /users': {
     handler: UsersController.index,
     config: {
-      auth: 'jwt'
+      auth: 'jwt',
+      plugins: {
+        //hapiAuthorization: { role: 'USER' } // tester :)
+      }
     }
   },
 
