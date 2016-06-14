@@ -1,5 +1,9 @@
 <template>
-  <nav-bar :logged-in="loggedIn" @logout="onLogout"></nav-bar>
+  <nav-bar
+    :is-logged-in="isLoggedIn"
+    :is-admin="isAdmin"
+    @logout="onLogout"
+  ></nav-bar>
 </template>
 
 <script>
@@ -10,24 +14,28 @@ export default {
 
   data () {
     return {
-      loggedIn: false
+      isLoggedIn: false,
+      isAdmin: false
     }
   },
 
   watch: {
-    '$root.token': 'onTokenChange'
+    '$root.user': 'onUserChange'
   },
 
   ready () {
-    this.$root.getUserToken()  // trigger token change
+    this.$root.getCurrentUser() // trigger token change and get logged in user info
+    // TODO this should probably in another container
   },
 
   methods: {
-    onTokenChange (token) {
-      if (token) {
-        this.loggedIn = true
+    onUserChange (user) {
+      if (user) {
+        this.isLoggedIn = true
+        this.isAdmin = (user.role === 'ADMIN')
       } else {
-        this.loggedIn = false
+        this.isLoggedIn = false
+        this.isAdmin = false
       }
     },
 

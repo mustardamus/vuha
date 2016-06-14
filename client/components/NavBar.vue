@@ -14,13 +14,14 @@
       <p class="navbar-item">
         <a v-link="{ path: '/', exact: true }">Home</a>
       </p>
-      <p class="navbar-item">
+
+      <p class="navbar-item" v-if="isAdmin">
         <a v-link="{ name: 'users' }">Users</a>
       </p>
     </div>
 
     <div class="navbar-right">
-      <template v-if="!loggedIn">
+      <template v-if="!isLoggedIn">
         <p class="navbar-item">
           <a v-link="{ name: 'register' }">Register</a>
         </p>
@@ -29,7 +30,7 @@
         </p>
       </template>
 
-      <template v-if="loggedIn">
+      <template v-if="isLoggedIn">
         <p class="navbar-item">
           <a v-link="{ name: 'profile' }">Profile</a>
         </p>
@@ -44,8 +45,8 @@
 <script>
 export default {
   props: {
-    loggedIn: Boolean,
-    default: false
+    isLoggedIn: Boolean,
+    isAdmin: Boolean
   },
 
   methods: {

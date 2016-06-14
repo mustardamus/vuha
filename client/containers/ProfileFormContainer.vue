@@ -22,12 +22,6 @@ export default {
     '$root.user': 'onUserChange'
   },
 
-  ready () {
-    if (!this.$root.user) {
-      this.$root.getCurrentUser()
-    }
-  },
-
   methods: {
     onUserChange (user) {
       this.user = user

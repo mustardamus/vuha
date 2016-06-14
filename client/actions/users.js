@@ -20,13 +20,15 @@ module.exports = {
   },
 
   getCurrentUser () {
-    this.$request('get', 'current_user', (err, res) => {
-      if (err) {
-        this.$root.addNotifyError(err)
-      } else {
-        this.$root.user = res
-      }
-    })
+    if (this.getUserToken()) {
+      this.$request('get', 'current_user', (err, res) => {
+        if (err) {
+          this.$root.addNotifyError(err)
+        } else {
+          this.$root.user = res
+        }
+      })
+    }
   },
 
   updateCurrentUser (data) {
@@ -112,6 +114,7 @@ module.exports = {
   logoutUser () {
     this.$root.removeUserToken()
     this.$root.addNotifyMessage('success', 'Bye ' + this.$root.user.username + '!')
+    this.$root.user = false
     this.$router.go({ name: 'home' })
   },
 

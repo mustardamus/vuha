@@ -8,7 +8,7 @@ module.exports = {
     config: {
       auth: 'jwt',
       plugins: {
-        // hapiAuthorization: { role: 'USER' } // tester :)
+        hapiAuthorization: { role: 'ADMIN' }
       }
     }
   },
