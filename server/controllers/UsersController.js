@@ -66,12 +66,10 @@ module.exports = {
           return reply(Helpers.boom.badImplementation('Creating user'))
         }
 
+        let token = user.getToken()
         user.password = undefined
 
-        reply({
-          user: user,
-          token: Helpers.jwt.sign(_.toString(user._id))
-        })
+        reply({ user, token })
       })
     })
   },
@@ -123,12 +121,10 @@ module.exports = {
 
       if (user) {
         if (user.validatePassword(request.query.password)) {
+          let token = user.getToken()
           user.password = undefined
 
-          reply({
-            user: user,
-            token: Helpers.jwt.sign(_.toString(user._id))
-          })
+          reply({ user, token })
         } else {
           reply(Helpers.boom.preconditionFailed('Password does not match'))
         }

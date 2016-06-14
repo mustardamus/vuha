@@ -1,7 +1,7 @@
 'use strict'
 
-module.exports = function (userId, request, cb) {
-  User.findById(userId, (err, user) => {
+module.exports = function (decoded, request, cb) {
+  User.findById(decoded._id, (err, user) => {
     if (err) {
       return cb(null, false)
     }
