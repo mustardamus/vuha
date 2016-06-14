@@ -20,15 +20,13 @@ module.exports = {
   },
 
   getCurrentUser () {
-    if (this.getUserToken()) {
-      this.$request('get', 'current_user', (err, res) => {
-        if (err) {
-          this.$root.addNotifyError(err)
-        } else {
-          this.$root.user = res
-        }
-      })
-    }
+    this.$request('get', 'current_user', (err, res) => {
+      if (err) {
+        this.$root.addNotifyError(err)
+      } else {
+        this.$root.user = res
+      }
+    })
   },
 
   updateCurrentUser (data) {

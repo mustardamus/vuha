@@ -23,11 +23,6 @@ export default {
     '$root.user': 'onUserChange'
   },
 
-  ready () {
-    this.$root.getCurrentUser() // trigger token change and get logged in user info
-    // TODO this should probably in another container
-  },
-
   methods: {
     onUserChange (user) {
       if (user) {

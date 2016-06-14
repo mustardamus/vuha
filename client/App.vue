@@ -10,7 +10,7 @@
 
 <template>
   <div id="app">
-    <layout></layout>
+    <layout-container></layout-container>
   </div>
 </template>
 
@@ -33,7 +33,9 @@ export default {
   data () { return State },
   methods: actions,
   mixins: [LogDataChangeMixin, RequestMixin],
-  components: { Layout: require('./components/Layout.vue') },
+  components: {
+    LayoutContainer: require('./containers/LayoutContainer.vue')
+  },
 
   ready () {
     if (process.env.NODE_ENV === 'development') {
