@@ -55,7 +55,7 @@ module.exports = {
         return reply(msg)
       }
 
-      let user = new User
+      let user = new User()
 
       user.username = query.username
       user.email = query.email

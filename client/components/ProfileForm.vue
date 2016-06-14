@@ -119,7 +119,7 @@ export default {
       validation: null,
       password: '',
       oldPassword: '',
-      passwordCheck: '',
+      passwordCheck: ''
     }
   },
 
