@@ -15,6 +15,8 @@ module.exports = function (mongoose) {
   schema.methods.validatePassword = function (password) {
     if (Helpers.bcrypt.compare(password, this.password)) {
       this.lastLogin = Date.now()
+      this.save() // TODO this does not update...
+
       return true
     } else {
       return false

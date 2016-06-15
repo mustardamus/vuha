@@ -5,28 +5,49 @@
 </style>
 
 <template>
-  <ul class="userList">
-    <li v-for="user in users | orderBy 'createdAt' -1">
-      <h1 class="title is-3 is-marginless">{{user.username}}</h1>
-      <p>
-        {{user._id}}
-
-        <a v-link="{ name: 'user', params: { id: user._id }}">Show</a>
-        <a @click="onDelete(user)">Delete</a>
-      </p>
-    </li>
-  </ul>
+  <div class="user-list columns">
+    <div class="column is-one-quarter" v-for="user in users | orderBy 'createdAt' -1">
+      <div class="card is-fullwidth">
+        <header class="card-header">
+          <p class="card-header-title">{{user.username}}</p>
+        </header>
+        <div class="card-content">
+          <ul class="content">
+            <li>ID: {{user._id}}</li>
+            <li>Role: {{user.role}}</li>
+            <li>Createt at: {{user.createdAt | moment}}</li>
+            <li>Last login: {{user.lastLogin | moment}}</li>
+          </ul>
+        </div>
+        <footer class="card-footer">
+          <a class="card-footer-item" v-link="{ name: 'user', params: { id: user._id }}">View</a>
+          <a class="card-footer-item">Edit</a>
+          <a class="card-footer-item" @click="onDelete(user)">Delete</a>
+        </footer>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   props: {
     users: Array
   },
 
+  filters: {
+    moment (val) {
+      return moment(val).format('MM-DD-YYYY kk:mm:ss')
+    }
+  },
+
   methods: {
     onDelete (user) {
-      this.$emit('delete', user._id)
+      if (confirm('Are you sure?')) {
+        this.$emit('delete', user._id)
+      }
     }
   }
 }

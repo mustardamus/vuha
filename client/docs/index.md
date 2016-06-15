@@ -24,3 +24,4 @@
 * [PhantomJS](http://phantomjs.org/documentation/) - a headless WebKit scriptable with a JavaScript API
 * [Mocha](https://mochajs.org/) - simple, flexible, fun javascript test framework
 * [UglifyJS 2](https://github.com/mishoo/UglifyJS2) - JavaScript parser / mangler / compressor / beautifier toolkit
+* [Moment.js](http://momentjs.com/docs/) - Parse, validate, manipulate, and display dates in javascript
