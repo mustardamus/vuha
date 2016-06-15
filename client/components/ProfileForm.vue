@@ -191,7 +191,7 @@ export default {
 
     onDeleteClick () {
       if (confirm('Are you sure?')) {
-        this.$root.deleteCurrentUser()
+        this.$emit('delete')
       }
     }
   }

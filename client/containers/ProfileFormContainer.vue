@@ -3,6 +3,7 @@
     :username="user.username"
     :email="user.email"
     @data="onData"
+    @delete="onDelete"
   ></profile-form>
 </template>
 
@@ -29,6 +30,10 @@ export default {
 
     onData (data) {
       this.$root.updateCurrentUser(data)
+    },
+
+    onDelete () {
+      this.$root.deleteCurrentUser()
     }
   }
 }
