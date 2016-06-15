@@ -8,7 +8,7 @@ module.exports = {
     config: {
       auth: 'jwt',
       plugins: {
-        hapiAuthorization: { role: 'SUPER_ADMIN' }
+        hapiAuthorization: { roles: ['SUPER_ADMIN', 'ADMIN'] }
       }
     }
   },
@@ -18,7 +18,7 @@ module.exports = {
     config: {
       auth: 'jwt',
       plugins: {
-        hapiAuthorization: { role: 'SUPER_ADMIN' }
+        hapiAuthorization: { roles: ['SUPER_ADMIN', 'ADMIN'] }
       }
     }
   },

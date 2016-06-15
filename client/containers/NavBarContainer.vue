@@ -27,7 +27,7 @@ export default {
     onUserChange (user) {
       if (user) {
         this.isLoggedIn = true
-        this.isAdmin = (user.role === 'ADMIN')
+        this.isAdmin = (user.role === 'SUPER_ADMIN' || user.role === 'ADMIN')
       } else {
         this.isLoggedIn = false
         this.isAdmin = false
