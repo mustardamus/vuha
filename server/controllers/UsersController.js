@@ -121,10 +121,18 @@ module.exports = {
 
       if (user) {
         if (user.validatePassword(request.query.password)) {
-          let token = user.getToken()
-          user.password = undefined
+          user.lastLogin = Date.now()
 
-          reply({ user, token })
+          user.save((err) => {
+            if (err) {
+              return reply(Helpers.boom.badImplementation('Update login time'))
+            }
+
+            let token = user.getToken()
+            user.password = undefined
+
+            reply({ user, token })
+          })
         } else {
           reply(Helpers.boom.preconditionFailed('Password does not match'))
         }
