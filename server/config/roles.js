@@ -1,1 +1,1 @@
-module.exports = ['ADMIN', 'USER']
+module.exports = ['SUPER_ADMIN', 'ADMIN', 'USER']

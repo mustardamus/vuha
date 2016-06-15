@@ -8,13 +8,30 @@ module.exports = {
     config: {
       auth: 'jwt',
       plugins: {
-        hapiAuthorization: { role: 'ADMIN' }
+        hapiAuthorization: { role: 'SUPER_ADMIN' }
       }
     }
   },
 
-  'GET /users/{id}': UsersController.read,
-  'DELETE /users/{id}': UsersController.delete,
+  'GET /users/{id}': {
+    handler: UsersController.read,
+    config: {
+      auth: 'jwt',
+      plugins: {
+        hapiAuthorization: { role: 'SUPER_ADMIN' }
+      }
+    }
+  },
+
+  'DELETE /users/{id}': {
+    handler: UsersController.delete,
+    config: {
+      auth: 'jwt',
+      plugins: {
+        hapiAuthorization: { role: 'SUPER_ADMIN' }
+      }
+    }
+  },
 
   'POST /users': {
     handler: UsersController.create,
@@ -30,7 +47,15 @@ module.exports = {
     }
   },
 
-  'PUT /users/{id}': UsersController.update,
+  'PUT /users/{id}': {
+    handler: UsersController.update,
+    config: {
+      auth: 'jwt',
+      plugins: {
+        hapiAuthorization: { role: 'SUPER_ADMIN' }
+      }
+    }
+  },
 
   'POST /login': {
     handler: UsersController.login,
