@@ -182,5 +182,21 @@ module.exports = {
         reply(user)
       })
     })
+  },
+
+  deleteCurrentUser (request, reply) {
+    let user = request.auth.credentials
+
+    if (!user) {
+      reply(Helpers.boom.preconditionFailed('Credentials not found'))
+    } else {
+      user.remove((err) => {
+        if (err) {
+          reply(Helpers.boom.badImplementation('User not removed'))
+        } else {
+          reply(true)
+        }
+      })
+    }
   }
 }

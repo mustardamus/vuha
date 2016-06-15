@@ -73,6 +73,16 @@ module.exports = {
     })
   },
 
+  deleteCurrentUser () {
+    this.$request('delete', 'current_user', (err, res) => {
+      if (err) {
+        this.$root.addNotifyError(err)
+      } else {
+        this.$root.logoutUser()
+      }
+    })
+  },
+
   setUserToken (token) {
     this.$root.token = token
     localStorage.setItem('token', token)

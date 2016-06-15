@@ -63,5 +63,10 @@ module.exports = {
         }
       }
     }
+  },
+
+  'DELETE /current_user': {
+    handler: UsersController.deleteCurrentUser,
+    config: { auth: 'jwt' }
   }
 }

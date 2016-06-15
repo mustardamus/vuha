@@ -97,9 +97,16 @@
       </span>
     </p>
 
-    <p class="control">
-      <button class="button is-primary" type="submit">Update</button>
-    </p>
+    <div class="columns">
+      <div class="column control">
+        <button class="button is-primary" type="submit">Update</button>
+      </div>
+      <div class="column">
+        <a @click="onDeleteClick" class="button is-small is-danger">
+          Delete my Profil
+        </a>
+      </div>
+    </div>
   </form>
 </template>
 
@@ -180,6 +187,12 @@ export default {
 
     passwordCheckConfirmation (val) {
       return (val === this.password)
+    },
+
+    onDeleteClick () {
+      if (confirm('Are you sure?')) {
+        this.$root.deleteCurrentUser()
+      }
     }
   }
 }
