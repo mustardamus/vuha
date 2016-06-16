@@ -1,7 +1,3 @@
-<style lang="sass">
-
-</style>
-
 <template>
   <user-list-container></user-list-container>
 </template>
@@ -10,14 +6,6 @@
 export default {
   components: {
     UserListContainer: require('../containers/UserListContainer.vue')
-  },
-
-  ready () {
-    this.$root.getUsers()
-  },
-
-  methods: {
-
   }
 }
 </script>

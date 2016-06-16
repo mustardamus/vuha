@@ -22,6 +22,10 @@ export default {
     '$root.users': 'onChange'
   },
 
+  ready () {
+    this.$root.getUsers()
+  },
+
   methods: {
     onChange (val) {
       this.users = val
