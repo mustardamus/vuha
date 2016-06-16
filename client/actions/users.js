@@ -12,9 +12,13 @@ module.exports = {
   getUser (userId) {
     this.$request('get', 'users/' + userId, (err, res) => {
       if (err) {
-        this.$root.addNotifyMessage('danger', 'Can not load user ' + userId)
+        this.$root.addNotifyError(err)
       } else {
-        this.$root.currentUser = res
+        if (res) {
+          this.$root.user = res
+        } else {
+          this.$root.addNotifyMessage('danger', 'Can not find user')
+        }
       }
     })
   },
@@ -48,6 +52,7 @@ module.exports = {
         this.$root.addNotifyMessage('danger', 'Can not delete user ' + userId)
       } else {
         this.$root.getUsers()
+        this.$router.go({ name: 'users' })
       }
     })
   },
