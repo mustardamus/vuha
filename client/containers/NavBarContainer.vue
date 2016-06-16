@@ -20,7 +20,7 @@ export default {
   },
 
   watch: {
-    '$root.user': 'onUserChange'
+    '$root.currentUser': 'onUserChange'
   },
 
   methods: {

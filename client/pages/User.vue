@@ -11,12 +11,12 @@
 <script>
 export default {
   watch: {
-    '$root.user': 'onChange'
+    '$root.currentUser': 'onChange'
   },
 
   data () {
     return {
-      user: this.$root.user
+      user: this.$root.currentUser
     }
   },
 

@@ -15,12 +15,12 @@ export default {
 
   data () {
     return {
-      user: this.$root.user
+      user: this.$root.currentUser
     }
   },
 
   watch: {
-    '$root.user': 'onUserChange'
+    '$root.currentUser': 'onUserChange'
   },
 
   methods: {

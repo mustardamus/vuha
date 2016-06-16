@@ -14,7 +14,7 @@ module.exports = {
       if (err) {
         this.$root.addNotifyMessage('danger', 'Can not load user ' + userId)
       } else {
-        this.$root.user = res
+        this.$root.currentUser = res
       }
     })
   },
@@ -24,7 +24,7 @@ module.exports = {
       if (err) {
         this.$root.addNotifyError(err)
       } else {
-        this.$root.user = res.user
+        this.$root.currentUser = res.user
 
         this.$root.setUserToken(res.token)
         this.$root.redirectAfterLogin()
@@ -37,7 +37,7 @@ module.exports = {
       if (err) {
         this.$root.addNotifyMessage('danger', 'Can update user ' + userId)
       } else {
-        this.$root.user = res
+        this.$root.currentUser = res
       }
     })
   },
@@ -57,7 +57,7 @@ module.exports = {
       if (err) {
         this.$root.addNotifyError(err)
       } else {
-        this.$root.user = res
+        this.$root.currentUser = res
       }
     })
   },
@@ -67,7 +67,7 @@ module.exports = {
       if (err) {
         this.$root.addNotifyError(err)
       } else {
-        this.$root.user = res
+        this.$root.currentUser = res
         this.$root.addNotifyMessage('success', 'Updated successfully')
       }
     })
@@ -111,7 +111,7 @@ module.exports = {
       if (err) {
         this.$root.addNotifyError(err)
       } else {
-        this.$root.user = res.user
+        this.$root.currentUser = res.user
 
         this.$root.setUserToken(res.token)
         this.$root.redirectAfterLogin()
@@ -121,13 +121,13 @@ module.exports = {
 
   logoutUser () {
     this.$root.removeUserToken()
-    this.$root.addNotifyMessage('success', 'Bye ' + this.$root.user.username + '!')
-    this.$root.user = false
+    this.$root.addNotifyMessage('success', 'Bye ' + this.$root.currentUser.username + '!')
+    this.$root.currentUser = false
     this.$router.go({ name: 'home' })
   },
 
   redirectAfterLogin () {
-    this.$root.addNotifyMessage('success', 'Hello ' + this.$root.user.username + '!')
+    this.$root.addNotifyMessage('success', 'Hello ' + this.$root.currentUser.username + '!')
     this.$router.go({ name: 'home' })
   }
 }
