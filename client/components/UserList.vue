@@ -14,6 +14,7 @@
         <div class="card-content">
           <ul class="content">
             <li>ID: {{user._id}}</li>
+            <li>E-Mail: {{user.email}}</li>
             <li>Role: {{user.role}}</li>
             <li>Createt at: {{user.createdAt | moment}}</li>
             <li>Last login: {{user.lastLogin | moment}}</li>
