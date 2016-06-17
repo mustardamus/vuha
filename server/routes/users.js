@@ -1,7 +1,3 @@
-'use strict'
-
-const Joi = require('joi')
-
 module.exports = {
   'GET /users': {
     handler: UsersController.index,
@@ -39,9 +35,9 @@ module.exports = {
       auth: false,
       validate: {
         query: {
-          username: Joi.string().required().alphanum(),
-          email: Joi.string().required().email(),
-          password: Joi.string().required().min(6)
+          username: Helpers.joi.string().required().alphanum(),
+          email: Helpers.joi.string().required().email(),
+          password: Helpers.joi.string().required().min(6)
         }
       }
     }
@@ -53,24 +49,11 @@ module.exports = {
       auth: 'jwt',
       validate: {
         query: {
-          role: Joi.string().required(),
+          role: Helpers.joi.string().required(),
         }
       },
       plugins: {
         hapiAuthorization: { role: 'SUPER_ADMIN' }
-      }
-    }
-  },
-
-  'POST /login': {
-    handler: UsersController.login,
-    config: {
-      auth: false,
-      validate: {
-        query: {
-          username: Joi.string().required(),
-          password: Joi.string().required()
-        }
       }
     }
   },
@@ -86,10 +69,10 @@ module.exports = {
       auth: 'jwt',
       validate: {
         query: {
-          username: Joi.string().required().alphanum(),
-          email: Joi.string().required().email(),
-          password: Joi.string().min(6),
-          oldPassword: Joi.string()
+          username: Helpers.joi.string().required().alphanum(),
+          email: Helpers.joi.string().required().email(),
+          password: Helpers.joi.string().min(6),
+          oldPassword: Helpers.joi.string()
         }
       }
     }
