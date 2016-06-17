@@ -15,7 +15,7 @@
 
   <div class="control is-grouped">
     <p class="control">
-      <a class="button is-primary">
+      <a class="button is-primary" v-link="{ name: 'userEdit', params: { id: user._id }}">
         Edit
       </a>
     </p>

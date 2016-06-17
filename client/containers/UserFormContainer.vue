@@ -1,11 +1,11 @@
 <template>
-  <user-show :user="user" @delete="onDelete"></user-show>
+  <user-form :user="user" :roles="roles" @data="onData"></user-form>
 </template>
 
 <script>
 export default {
   components: {
-    UserShow: require('../components/UserShow.vue')
+    UserForm: require('../components/UserForm.vue')
   },
 
   watch: {
@@ -14,7 +14,8 @@ export default {
 
   data () {
     return {
-      user: this.$root.user
+      user: this.$root.user,
+      roles: ['SUPER_ADMIN', 'ADMIN', 'USER']
     }
   },
 
@@ -27,8 +28,9 @@ export default {
       this.user = val
     },
 
-    onDelete (userId) {
-      this.$root.deleteUser(userId)
+    onData (data) {
+      //this.$root.updateUser(this.$route.params.id, data)
+      console.log(data);
     }
   }
 }

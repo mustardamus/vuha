@@ -1,18 +1,21 @@
 <template>
   <div class="userForm">
+    <h1 class="title">{{user.username}}</h1>
+    <h2 class="subtitle">{{user._id}}</h2>
+
     <form @submit.prevent="onSubmit">
-      <label class="label" for="userForm-username">Userame</label>
       <p class="control">
-        <input v-model="username" class="input" type="text" placeholder="Username" id="userForm-username">
+        <span class="select">
+          <select v-model="user.role">
+            <option v-for="role in roles" v-bind:value="role">
+              {{role}}
+            </option>
+          </select>
+        </span>
       </p>
 
-      <label class="label" for="userForm-password">Password</label>
       <p class="control">
-        <input v-model="password" class="input" type="password" placeholder="********" id="userForm-password">
-      </p>
-
-      <p class="control">
-        <button class="button is-primary" type="submit">{{buttonText}}</button>
+        <button class="button is-primary" type="submit">Update</button>
       </p>
     </form>
   </div>
@@ -21,29 +24,13 @@
 <script>
 export default {
   props: {
-    username: String,
-    password: String,
-    buttonText: {
-      type: String,
-      default: 'Save'
-    },
-    resetAfterData: {
-      type: Boolean,
-      default: true
-    }
+    user: Object,
+    roles: Array
   },
 
   methods: {
     onSubmit () {
-      this.$emit('data', {
-        username: this.username,
-        password: this.password
-      })
-
-      if (this.resetAfterData) {
-        this.username = ''
-        this.password = ''
-      }
+      this.$emit('data', this.user)
     }
   }
 }

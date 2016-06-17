@@ -9,6 +9,11 @@ module.exports = {
     component: require('../pages/User.vue')
   },
 
+  '/users/:id/edit': {
+    name: 'userEdit',
+    component: require('../pages/UserEdit.vue')
+  },
+
   '/register': {
     name: 'register',
     component: require('../pages/Register.vue')

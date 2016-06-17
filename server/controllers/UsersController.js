@@ -77,10 +77,11 @@ module.exports = {
   read (request, reply) {
     User.findById(request.params.id, (err, user) => {
       if (err) {
-        return reply(err)
+        reply(err)
+      } else {
+        user.password = undefined
+        reply(user)
       }
-
-      reply(user)
     })
   },
 
