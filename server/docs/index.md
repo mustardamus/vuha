@@ -17,3 +17,5 @@
 * [StandardJS](http://standardjs.com/rules.html) - JavaScript Standard Style
 * [Forever](https://github.com/foreverjs/forever) - A simple CLI tool for ensuring that a given script runs continuously
 * [Mocha](https://mochajs.org/) - simple, flexible, fun javascript test framework
+* [mailgun-js](https://github.com/bojand/mailgun-js) - A simple Node.js helper module for Mailgun API
+* [mailcomposer](https://github.com/nodemailer/mailcomposer) - Composes e-mails from structured data
