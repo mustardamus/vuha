@@ -51,6 +51,11 @@ module.exports = {
     handler: UsersController.update,
     config: {
       auth: 'jwt',
+      validate: {
+        query: {
+          role: Joi.string().required(),
+        }
+      },
       plugins: {
         hapiAuthorization: { role: 'SUPER_ADMIN' }
       }

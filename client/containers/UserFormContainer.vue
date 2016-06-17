@@ -29,8 +29,9 @@ export default {
     },
 
     onData (data) {
-      //this.$root.updateUser(this.$route.params.id, data)
-      console.log(data);
+      this.$root.updateUser(this.$route.params.id, {
+        role: data.role
+      })
     }
   }
 }

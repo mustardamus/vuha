@@ -39,9 +39,10 @@ module.exports = {
   updateUser (userId, data) {
     this.$request('put', 'users/' + userId, data, (err, res) => {
       if (err) {
-        this.$root.addNotifyMessage('danger', 'Can update user ' + userId)
+        this.$root.addNotifyError(err)
       } else {
-        this.$root.currentUser = res
+        this.$root.user = res
+        this.$root.addNotifyMessage('success', 'Updated successfully')
       }
     })
   },

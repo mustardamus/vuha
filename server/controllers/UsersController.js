@@ -91,15 +91,15 @@ module.exports = {
         return reply(err)
       }
 
-      user.username = request.query.username
-      user.password = request.query.password
+      user.role = request.query.role
 
       user.save((err) => {
         if (err) {
-          return reply(err)
+          reply(err)
+        } else {
+          user.password = undefined
+          reply(user)
         }
-
-        reply(user)
       })
     })
   },
