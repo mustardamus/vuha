@@ -1,5 +1,7 @@
 'use strict'
 
+const Handlebars = require('handlebars')
+
 const sendResetToken = function (user, cb) {
   user.resetToken = user.getResetToken('30m')
 
