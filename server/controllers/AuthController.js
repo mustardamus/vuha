@@ -1,5 +1,15 @@
 'use strict'
 
+const sendResetToken = function (user, cb) {
+  console.log('send reset token', user);
+  Helpers.mail({
+    to: 'me@akrasia.me',
+    subject: 'subject und so',
+    text: 'nur so der text',
+    html: 'mit <a href="http://akrasia.me">link</a>'
+  }, cb)
+}
+
 module.exports = {
   login (request, reply) {
     User.findOne({ username: request.query.username }, (err, user) => {
@@ -31,16 +41,34 @@ module.exports = {
   },
 
   forgot (request, reply) {
-    Helpers.mail({
-      to: 'me@akrasia.me',
-      subject: 'subject und so',
-      text: 'nur so der text',
-      html: 'mit <a href="http://akrasia.me">link</a>'
-    }, (err, body) => {
+    let usernameOrEmail = request.query.usernameOrEmail
+    let sendCb = function (err) {
       if (err) {
-        reply(err)
+        reply(Helpers.boom.badImplementation('Can not send reset mail'))
       } else {
         reply(true)
+      }
+    }
+
+    User.findOne({ username: usernameOrEmail }, (err, user) => {
+      if (err) {
+        return reply(Helpers.boom.badImplementation('Find username'))
+      }
+
+      if (user) {
+        sendResetToken(user, sendCb)
+      } else {
+        User.findOne({ email: usernameOrEmail }, (err, user) => {
+          if (err) {
+            return reply(Helpers.boom.badImplementation('Find email'))
+          }
+
+          if (user) {
+            sendResetToken(user, sendCb)
+          } else {
+            reply(Helpers.boom.preconditionFailed('User not found'))
+          }
+        })
       }
     })
   }
