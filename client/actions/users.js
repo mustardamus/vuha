@@ -135,5 +135,15 @@ module.exports = {
   redirectAfterLogin () {
     this.$root.addNotifyMessage('success', 'Hello ' + this.$root.currentUser.username + '!')
     this.$router.go({ name: 'home' })
+  },
+
+  sendResetToken (usernameOrEmail) {
+    this.$request('post', 'forgot', { usernameOrEmail }, (err, res) => {
+      if (err) {
+        this.$root.addNotifyError(err)
+      } else {
+        console.log(res);
+      }
+    })
   }
 }

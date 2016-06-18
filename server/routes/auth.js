@@ -12,5 +12,15 @@ module.exports = {
     }
   },
 
-  'POST /forgot': AuthController.forgot
+  'POST /forgot': {
+    handler: AuthController.forgot,
+    config: {
+      auth: false,
+      validate: {
+        query: {
+          usernameOrEmail: Helpers.joi.string().required()
+        }
+      }
+    }
+  }
 }

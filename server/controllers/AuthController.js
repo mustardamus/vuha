@@ -31,6 +31,17 @@ module.exports = {
   },
 
   forgot (request, reply) {
-    reply(true)
+    Helpers.mail({
+      to: 'me@akrasia.me',
+      subject: 'subject und so',
+      text: 'nur so der text',
+      html: 'mit <a href="http://akrasia.me">link</a>'
+    }, (err, body) => {
+      if (err) {
+        reply(err)
+      } else {
+        reply(true)
+      }
+    })
   }
 }
