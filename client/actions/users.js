@@ -142,7 +142,7 @@ module.exports = {
       if (err) {
         this.$root.addNotifyError(err)
       } else {
-        console.log(res);
+        this.$root.addNotifyMessage('success', 'Reset E-Mail sent')
       }
     })
   }
