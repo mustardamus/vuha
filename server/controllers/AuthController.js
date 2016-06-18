@@ -1,8 +1,13 @@
 'use strict'
 
+const fs = require('fs')
 const Handlebars = require('handlebars')
 
-const sendResetToken = function (user, cb) {
+const mailTemplatesPath = __dirname + '/../views/mails/reset'
+const resetTextTemplate = Handlebars.compile(fs.readFileSync(mailTemplatesPath + '/text.hbs', 'utf8'))
+const resetHtmlTemplate = Handlebars.compile(fs.readFileSync(mailTemplatesPath + '/html.hbs', 'utf8'))
+
+const sendResetToken = function (user, referrer, cb) {
   user.resetToken = user.getResetToken('30m')
 
   user.save((err) => {
@@ -13,8 +18,8 @@ const sendResetToken = function (user, cb) {
     Helpers.mail({
       to: user.email,
       subject: 'Password reset',
-      text: user.resetToken,
-      html: user.resetToken
+      text: resetTextTemplate({ user, referrer }),
+      html: resetHtmlTemplate({ user, referrer })
     }, cb)
   })
 }
@@ -65,7 +70,7 @@ module.exports = {
       }
 
       if (user) {
-        sendResetToken(user, sendCb)
+        sendResetToken(user, request.info.referrer, sendCb)
       } else {
         User.findOne({ email: usernameOrEmail }, (err, user) => {
           if (err) {
@@ -73,7 +78,7 @@ module.exports = {
           }
 
           if (user) {
-            sendResetToken(user, sendCb)
+            sendResetToken(user, request.info.referrer, sendCb)
           } else {
             reply(Helpers.boom.preconditionFailed('User not found'))
           }
