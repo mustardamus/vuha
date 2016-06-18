@@ -96,10 +96,8 @@ server.register(pluginsArr, (err) => {
       server.route({
         method: routeArr[0],
         path: routeArr[1],
-        config: config,
-        handler: function (request, reply) {
-          handler.call(handler, request, reply)
-        }
+        handler: handler,
+        config: config
       })
     }
   }

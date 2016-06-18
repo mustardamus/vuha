@@ -70,7 +70,7 @@ export default {
     },
 
     onForgotClick () {
-      this.$root.sendResetToken('test@emailx.com')
+      this.$root.sendResetToken('me@akrasia.me')
     }
   }
 }

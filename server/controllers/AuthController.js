@@ -1,13 +1,20 @@
 'use strict'
 
 const sendResetToken = function (user, cb) {
-  console.log('send reset token', user);
-  Helpers.mail({
-    to: 'me@akrasia.me',
-    subject: 'subject und so',
-    text: 'nur so der text',
-    html: 'mit <a href="http://akrasia.me">link</a>'
-  }, cb)
+  user.resetToken = user.getResetToken('30m')
+
+  user.save((err) => {
+    if (err) {
+      return cb(err)
+    }
+
+    Helpers.mail({
+      to: user.email,
+      subject: 'Password reset',
+      text: user.resetToken,
+      html: user.resetToken
+    }, cb)
+  })
 }
 
 module.exports = {

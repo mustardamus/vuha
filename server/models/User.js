@@ -7,7 +7,8 @@ module.exports = function (mongoose) {
     password: { type: String, required: true },
     email: { type: String, required: true },
     role: { type: String, default: 'USER' },
-    lastLogin: { type: Date, default: Date.now() }
+    lastLogin: { type: Date, default: Date.now() },
+    resetToken: { type: String }
   }, {
     timestamps: true
   })
@@ -25,6 +26,15 @@ module.exports = function (mongoose) {
       _id: _.toString(this._id),
       lastLogin: this.lastLogin
     })
+
+    return token
+  }
+
+  schema.methods.getResetToken = function (expiresIn) {
+    let token = Helpers.jwt.signExpire({
+      _id: _.toString(this._id),
+      lastLogin: this.lastLogin
+    }, expiresIn)
 
     return token
   }
