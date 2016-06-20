@@ -145,5 +145,16 @@ module.exports = {
         this.$root.addNotifyMessage('success', 'Reset E-Mail sent')
       }
     })
+  },
+
+  resetPassword (password, token) {
+    this.$request('post', 'reset', { password, token }, (err, res) => {
+      if (err) {
+        this.$root.addNotifyError(err)
+      } else {
+        this.$root.addNotifyMessage('success', 'New password saved')
+        this.$router.go({ name: 'login' })
+      }
+    })
   }
 }

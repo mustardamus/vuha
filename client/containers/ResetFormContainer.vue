@@ -10,7 +10,7 @@ export default {
 
   methods: {
     onData (data) {
-      console.log('reset shizzle', data, this.$route.params.token);
+      this.$root.resetPassword(data.password, this.$route.params.token)
     }
   }
 }
