@@ -27,5 +27,10 @@ module.exports = {
   '/profile': {
     name: 'profile',
     component: require('../pages/Profile.vue')
+  },
+
+  '/reset/:token': {
+    name: 'reset',
+    component: require('../pages/Reset.vue')
   }
 }
