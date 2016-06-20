@@ -37,10 +37,6 @@ export default {
     }
   },
 
-  ready () {
-    this.$('form input').get(0).focus()
-  },
-
   methods: {
     onSubmit () {
       if (this.validation.$valid) {

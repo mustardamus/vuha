@@ -85,5 +85,35 @@ module.exports = {
         })
       }
     })
+  },
+
+  reset (request, reply) {
+    let token = request.query.token
+
+    Helpers.jwt.verify(token, (err, decoded) => {
+      if (err) {
+        return reply(Helpers.boom.preconditionFailed('Token not valid'))
+      }
+
+      User.findOne({ resetToken: token }, (err, user) => {
+        if (err) {
+          return reply(Helpers.boom.badImplementation('Find user'))
+        }
+
+        if (user) {
+          user.password = Helpers.bcrypt.hash(request.query.password)
+
+          user.save((err) => {
+            if (err) {
+              reply(Helpers.boom.badImplementation('Saving user'))
+            } else {
+              reply(true)
+            }
+          })
+        } else {
+          reply(Helpers.boom.preconditionFailed('Reset token not found'))
+        }
+      })
+    })
   }
 }

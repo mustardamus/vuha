@@ -22,5 +22,18 @@ module.exports = {
         }
       }
     }
+  },
+
+  'POST /reset': {
+    handler: AuthController.reset,
+    config: {
+      auth: false,
+      validate: {
+        query: {
+          password: Helpers.joi.string().required().min(6),
+          token: Helpers.joi.string().required()
+        }
+      }
+    }
   }
 }

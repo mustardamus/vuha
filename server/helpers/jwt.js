@@ -7,8 +7,8 @@ module.exports = {
     return jwt.sign(obj, Config.auth.jwt.secret)
   },
 
-  verify (token) {
-    return jwt.verify(token, Config.auth.jwt.secret)
+  verify (token, cb) {
+    return jwt.verify(token, Config.auth.jwt.secret, cb)
   },
 
   signExpire (obj, expiresIn) {
