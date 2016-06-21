@@ -1,11 +1,5 @@
 <style lang="sass">
-@import "../node_modules/bulma/bulma/utilities/utilities"
-@import "../node_modules/bulma/bulma/config/variables"
-@import "../node_modules/bulma/bulma/config/generated-variables"
-@import "../node_modules/bulma/bulma/base/base"
-@import "../node_modules/bulma/bulma/elements/elements"
-@import "../node_modules/bulma/bulma/components/components"
-@import "../node_modules/bulma/bulma/layout/layout"
+@import "../node_modules/bulma/bulma"
 @import "../node_modules/font-awesome/scss/font-awesome"
 </style>
 
