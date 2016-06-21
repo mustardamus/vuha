@@ -1,7 +1,7 @@
 <style lang="sass">
 .notify
   position: absolute
-  top: 50px
+  top: 70px
   right: 20px
   width: 40%
 </style>
