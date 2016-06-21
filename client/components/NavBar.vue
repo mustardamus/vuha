@@ -3,9 +3,6 @@
   padding: 10px 20px
   background: rgba(0, 0, 0, 0.1)
   border-bottom: 2px solid rgba(0, 0, 0, 0.2)
-
-  .v-link-active
-    color: #222
 </style>
 
 <template>

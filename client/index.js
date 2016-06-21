@@ -9,7 +9,7 @@ Vue.use(VueRouter)
 Vue.use(VueForm)
 
 const $root = Vue.extend(App)
-const router = new VueRouter()
+const router = new VueRouter({ linkActiveClass: 'is-active' })
 const routesObj = Bulk(__dirname, [ 'routes/*.js']).routes
 let routes = {}
 
