@@ -12,7 +12,10 @@
   <nav class="navbar nav-bar">
     <div class="navbar-left">
       <p class="navbar-item">
-        <a v-link="{ path: '/', exact: true }">Home</a>
+        <a v-link="{ path: '/', exact: true }">
+          <span class="icon"><i class="fa fa-home"></i></span>
+          Home
+        </a>
       </p>
 
       <p class="navbar-item" v-if="isAdmin">

@@ -6,6 +6,7 @@
 @import "../node_modules/bulma/bulma/elements/elements"
 @import "../node_modules/bulma/bulma/components/components"
 @import "../node_modules/bulma/bulma/layout/layout"
+@import "../node_modules/font-awesome/scss/font-awesome"
 </style>
 
 <template>

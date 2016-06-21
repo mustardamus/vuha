@@ -15,10 +15,14 @@ export default {
         headers.Authorization = token
       }
 
+      this.$root.isLoading = true
+
       superagent[verb]('/' + url)
         .set(headers)
         .query(query)
         .end((err, response) => {
+          this.$root.isLoading = false
+
           if (err) {
             cb(err)
           } else {
