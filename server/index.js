@@ -74,31 +74,42 @@ server.register(pluginsArr, (err) => {
   for (let routeName in ekso.Routes) {
     for (let routePath in ekso.Routes[routeName]) {
       let routeArr = routePath.split(' ')
-      let handler = ekso.Routes[routeName][routePath]
+      let routeObj = ekso.Routes[routeName][routePath]
+      let handlerArr = []
       let config = { auth: false }
-      let chalkRoute = Chalk.yellow('(' + routeName + ') ' + routePath)
 
-      if (!_.isFunction(handler) && _.isObject(handler)) {
-        if (handler.config) {
-          config = handler.config
+      if (_.isString(routeObj)) {
+        handlerArr = routeObj.split('.')
+      } else if(_.isObject(routeObj)) {
+        if (_.isString(routeObj.handler)) {
+          handlerArr = routeObj.handler.split('.')
+        } else {
+          console.log(Chalk.red('If route config is a Object, "handler" must be defined as a String'))
         }
 
-        handler = handler.handler
+        if (routeObj.config) {
+          config = routeObj.config
+        }
       }
 
-      if (!handler) {
-        console.log(Chalk.red('Could not find Controller for'), Chalk.yellow(routePath))
-        continue
+      let method = routeArr[0]
+      let path = routeArr[1]
+      let controller = handlerArr[0]
+      let action = handlerArr[1]
+
+      if (!ekso.Controllers[controller]) {
+        console.log(Chalk.red('Controller "' + controller + '" not found'))
+      } else if (!ekso.Controllers[controller][action]) {
+        console.log(Chalk.red('Action "' + controller + '.' + action + '" not found'))
+      } else {
+        let handlerFunc = ekso.Controllers[controller][action]
+        let handler = function (request, reply) {
+          handlerFunc.call(ekso.Controllers[controller], request, reply)
+        }
+
+        server.route({ method, path, handler, config })
+        console.log(Chalk.green('Route:'), Chalk.yellow(routePath + ' -> ' + controller + '.' + action))
       }
-
-      console.log(Chalk.green('Route:'), chalkRoute)
-
-      server.route({
-        method: routeArr[0],
-        path: routeArr[1],
-        handler: handler,
-        config: config
-      })
     }
   }
 })
@@ -116,7 +127,6 @@ server.start((err) => {
     throw err
   }
 
-  console.log(Chalk.green('Server running:'), Chalk.yellow(server.info.uri))
-
   Mongoose.connect(Config.database.url)
+  console.log(Chalk.green('Server running:'), Chalk.yellow(server.info.uri))
 })

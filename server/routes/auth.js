@@ -1,6 +1,6 @@
 module.exports = {
   'POST /login': {
-    handler: AuthController.login,
+    handler: 'AuthController.login',
     config: {
       auth: false,
       validate: {
@@ -13,7 +13,7 @@ module.exports = {
   },
 
   'POST /forgot': {
-    handler: AuthController.forgot,
+    handler: 'AuthController.forgot',
     config: {
       auth: false,
       validate: {
@@ -25,7 +25,7 @@ module.exports = {
   },
 
   'POST /reset': {
-    handler: AuthController.reset,
+    handler: 'AuthController.reset',
     config: {
       auth: false,
       validate: {

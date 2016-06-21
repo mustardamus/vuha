@@ -1,6 +1,6 @@
 module.exports = {
   'GET /users': {
-    handler: UsersController.index,
+    handler: 'UsersController.index',
     config: {
       auth: 'jwt',
       plugins: {
@@ -10,7 +10,7 @@ module.exports = {
   },
 
   'GET /users/{id}': {
-    handler: UsersController.read,
+    handler: 'UsersController.read',
     config: {
       auth: 'jwt',
       plugins: {
@@ -20,7 +20,7 @@ module.exports = {
   },
 
   'DELETE /users/{id}': {
-    handler: UsersController.delete,
+    handler: 'UsersController.delete',
     config: {
       auth: 'jwt',
       plugins: {
@@ -30,7 +30,7 @@ module.exports = {
   },
 
   'POST /users': {
-    handler: UsersController.create,
+    handler: 'UsersController.create',
     config: {
       auth: false,
       validate: {
@@ -44,7 +44,7 @@ module.exports = {
   },
 
   'PUT /users/{id}': {
-    handler: UsersController.update,
+    handler: 'UsersController.update',
     config: {
       auth: 'jwt',
       validate: {
@@ -59,12 +59,12 @@ module.exports = {
   },
 
   'GET /current_user': {
-    handler: UsersController.getCurrentUser,
+    handler: 'UsersController.getCurrentUser',
     config: { auth: 'jwt' }
   },
 
   'PUT /current_user': {
-    handler: UsersController.updateCurrentUser,
+    handler: 'UsersController.updateCurrentUser',
     config: {
       auth: 'jwt',
       validate: {
@@ -79,7 +79,7 @@ module.exports = {
   },
 
   'DELETE /current_user': {
-    handler: UsersController.deleteCurrentUser,
+    handler: 'UsersController.deleteCurrentUser',
     config: { auth: 'jwt' }
   }
 }
