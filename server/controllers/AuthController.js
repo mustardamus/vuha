@@ -102,6 +102,7 @@ module.exports = {
 
         if (user) {
           user.password = Helpers.bcrypt.hash(request.query.password)
+          user.resetToken = ''
 
           user.save((err) => {
             if (err) {
