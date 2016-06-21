@@ -22,7 +22,13 @@
       </p>
     </div>
 
-    <div class="nav-right">
+    <span class="nav-toggle" @click="onNavToggleClick">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+
+    <div :class="{'nav-right': true, 'nav-menu': true, 'is-active': isToggleMenuActive}">
       <template v-if="!isLoggedIn">
         <p class="nav-item">
           <a class="button" v-link="{ name: 'register' }">
@@ -57,15 +63,37 @@
 </template>
 
 <script>
+import CashMixin from '../mixins/cash.js'
+
 export default {
+  mixins: [CashMixin],
+
   props: {
     isLoggedIn: Boolean,
     isAdmin: Boolean
   },
 
+  data () {
+    return {
+      isToggleMenuActive: false
+    }
+  },
+
+  ready () {
+    // vue-router highjacks the click event, so @click does not work in template
+    // listen on a extra click event via cash and close the nav menu
+    this.$('.nav-menu .button').on('click', () => {
+      this.isToggleMenuActive = false
+    })
+  },
+
   methods: {
     onLogoutClick () {
       this.$emit('logout')
+    },
+
+    onNavToggleClick () {
+      this.isToggleMenuActive = !this.isToggleMenuActive
     }
   }
 }
