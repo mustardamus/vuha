@@ -20,7 +20,6 @@ export default {
   methods: {
     onData (data) {
       this.$root.sendResetToken(data.usernameOrEmail)
-      this.usernameOrEmail = ''
     }
   }
 }

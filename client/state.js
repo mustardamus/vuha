@@ -4,5 +4,5 @@ export default {
   isLoading: false,   // indicate if (ajax) is loading
   notifyMessages: [], // temporarely store global notify messages
   user: {},           // information about specific user
-  users: []           // only for testing, remove me
+  users: []           // array of all users
 }
