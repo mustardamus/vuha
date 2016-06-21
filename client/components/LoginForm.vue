@@ -29,10 +29,6 @@
     <p class="control">
       <button class="button is-primary" type="submit">Login</button>
     </p>
-
-    <a @click="onForgotClick">
-      Forgot that password brah
-    </a>
   </form>
 </template>
 
@@ -67,10 +63,6 @@ export default {
       } else {
         this.$('form .vf-invalid').get(0).focus()
       }
-    },
-
-    onForgotClick () {
-      this.$root.sendResetToken('me@akrasia.me')
     }
   }
 }

@@ -1,10 +1,14 @@
 <style lang="sass">
-
+body, html
+  background: white  
 </style>
 
 <template>
   <nav-bar-container></nav-bar-container>
-  <router-view></router-view>
+
+  <section class="section">
+    <router-view></router-view>
+  </section>
 
   <loading-overlay-container></loading-overlay-container>
   <notify-container></notify-container>
