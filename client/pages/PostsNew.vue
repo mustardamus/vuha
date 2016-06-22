@@ -1,11 +1,11 @@
 <template>
-  <post-form-container></post-form-container>
+  <post-new-container></post-new-container>
 </template>
 
 <script>
 export default {
   components: {
-    PostFormContainer: require('../containers/PostFormContainer.vue')
+    PostNewContainer: require('../containers/PostNewContainer.vue')
   }
 }
 </script>

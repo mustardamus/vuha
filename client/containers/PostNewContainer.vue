@@ -1,15 +1,17 @@
 <template>
-  <post-form
-    :title="title"
-    :markdown="markdown"
-    @data="onData"
-  ></post-form>
+  <post-form :button-text="buttonText" @data="onData"></post-form>
 </template>
 
 <script>
 export default {
   components: {
     PostForm: require('../components/PostForm.vue')
+  },
+
+  data () {
+    return {
+      buttonText: 'Create'
+    }
   },
 
   methods: {

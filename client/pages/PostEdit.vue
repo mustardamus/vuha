@@ -1,11 +1,11 @@
 <template>
-  <post-form-container></post-form-container>
+  <post-edit-container></post-edit-container>
 </template>
 
 <script>
 export default {
   components: {
-    PostFormContainer: require('../containers/PostFormContainer.vue')
+    PostEditContainer: require('../containers/PostEditContainer.vue')
   }
 }
 </script>

@@ -41,7 +41,7 @@
     </div>
 
     <p class="control">
-      <button class="button is-primary" type="submit">Create</button>
+      <button class="button is-primary" type="submit">{{buttonText}}</button>
     </p>
   </form>
 </template>
@@ -51,7 +51,8 @@ export default {
   props: {
     title: String,
     excerpt: String,
-    markdown: String
+    markdown: String,
+    buttonText: String
   },
 
   data () {
@@ -62,10 +63,6 @@ export default {
 
   ready () {
     this.$('form input').get(0).focus()
-
-    this.title = 'Just keep on going'
-    this.excerpt = 'What this is about?!'
-    this.markdown = '# Markdown\n\n* should\n* work'
   },
 
   methods: {
