@@ -14,7 +14,7 @@ export default {
 
   methods: {
     onData (data) {
-      console.log('post', data);
+      this.$root.createPost(data)
     }
   }
 }

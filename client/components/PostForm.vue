@@ -50,6 +50,9 @@ export default {
 
   ready () {
     this.$('form input').get(0).focus()
+
+    this.title = 'Just keep on going'
+    this.content = '# Markdown\n\n* should\n* work'
   },
 
   methods: {
