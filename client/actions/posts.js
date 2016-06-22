@@ -9,8 +9,8 @@ module.exports = {
     })
   },
 
-  getPost (postId) {
-    this.$request('get', 'posts/' + postId, (err, res) => {
+  getPost (slug) {
+    this.$request('get', 'posts/' + slug, (err, res) => {
       if (err) {
         this.$root.addNotifyError(err)
       } else {
@@ -29,7 +29,7 @@ module.exports = {
         this.$root.addNotifyError(err)
       } else {
         this.$root.addNotifyMessage('success', 'Post created')
-        this.$router.go({ name: 'post', params: { id: res._id } })
+        this.$router.go({ name: 'post', params: { slug: res.slug } })
       }
     })
   }

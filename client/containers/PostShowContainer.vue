@@ -19,7 +19,7 @@ export default {
   },
 
   ready () {
-    this.$root.getPost(this.$route.params.id)
+    this.$root.getPost(this.$route.params.slug)
   },
 
   methods: {

@@ -4,7 +4,7 @@ module.exports = {
   index (request, reply) {
     Post.find((err, posts) => {
       if (err) {
-        reply(err)
+        reply(Helpers.boom.badImplementation('Find posts'))
       } else {
         reply(posts)
       }
@@ -25,11 +25,15 @@ module.exports = {
   },
 
   read (request, reply) {
-    Post.findById(request.params.id, (err, post) => {
+    Post.findOne({ slug: request.params.slug }, (err, post) => {
       if (err) {
-        reply(err)
-      } else {
+        return reply(Helpers.boom.badImplementation('Find post'))
+      }
+
+      if (post) {
         reply(post)
+      } else {
+        reply(Helpers.boom.preconditionFailed('Post not found'))
       }
     })
   }

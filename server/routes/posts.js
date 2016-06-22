@@ -1,6 +1,6 @@
 module.exports = {
   'GET /posts': 'PostsController.index',
-  'GET /posts/{id}': 'PostsController.read',
+  'GET /posts/{slug}': 'PostsController.read',
 
   'POST /posts': {
     handler: 'PostsController.create',

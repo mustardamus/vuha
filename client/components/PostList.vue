@@ -5,7 +5,7 @@
 <template>
   <div class="post-list">
     <ul v-for="post in posts | orderBy 'createdAt' -1">
-      <a v-link="{ name: 'post', params: { id: post._id }}">
+      <a v-link="{ name: 'post', params: { slug: post.slug }}">
         {{post.title}}
       </a>
     </ul>
