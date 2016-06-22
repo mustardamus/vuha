@@ -20,3 +20,4 @@
 * [mailgun-js](https://github.com/bojand/mailgun-js) - A simple Node.js helper module for Mailgun API
 * [mailcomposer](https://github.com/nodemailer/mailcomposer) - Composes e-mails from structured data
 * [marked](https://github.com/chjj/marked) - A markdown parser and compiler
+* [slug](https://github.com/dodo/node-slug) - slugifies even utf-8 chars
