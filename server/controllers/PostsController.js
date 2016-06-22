@@ -22,5 +22,15 @@ module.exports = {
         reply(post)
       }
     })
+  },
+
+  read (request, reply) {
+    Post.findById(request.params.id, (err, post) => {
+      if (err) {
+        reply(err)
+      } else {
+        reply(post)
+      }
+    })
   }
 }
