@@ -29,7 +29,7 @@ module.exports = {
         this.$root.addNotifyError(err)
       } else {
         this.$root.addNotifyMessage('success', 'Post created')
-        console.log(res)
+        this.$router.go({ name: 'post', params: { id: res._id } })
       }
     })
   }
