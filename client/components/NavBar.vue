@@ -14,12 +14,21 @@
         </a>
       </p>
 
-      <p class="nav-item" v-if="isAdmin">
-        <a class="button" v-link="{ name: 'users' }">
-          <span class="icon"><i class="fa fa-users"></i></span>
-          <span>Users</span>
-        </a>
-      </p>
+      <template v-if="isAdmin">
+        <p class="nav-item">
+          <a class="button" v-link="{ name: 'users' }">
+            <span class="icon"><i class="fa fa-users"></i></span>
+            <span>Users</span>
+          </a>
+        </p>
+
+        <p class="nav-item">
+          <a class="button" v-link="{ name: 'postsNew' }">
+            <span class="icon"><i class="fa fa-users"></i></span>
+            <span>New Post</span>
+          </a>
+        </p>
+      </template>
     </div>
 
     <span class="nav-toggle" @click="onNavToggleClick">
