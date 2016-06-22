@@ -96,15 +96,16 @@ server.register(pluginsArr, (err) => {
       let path = routeArr[1]
       let controller = handlerArr[0]
       let action = handlerArr[1]
+      let controllerObj = ekso.Controllers[controller]
 
-      if (!ekso.Controllers[controller]) {
+      if (!controllerObj) {
         console.log(Chalk.red('Controller "' + controller + '" not found'))
-      } else if (!ekso.Controllers[controller][action]) {
+      } else if (!controllerObj[action]) {
         console.log(Chalk.red('Action "' + controller + '.' + action + '" not found'))
       } else {
-        let handlerFunc = ekso.Controllers[controller][action]
+        let handlerFunc = controllerObj[action]
         let handler = function (request, reply) {
-          handlerFunc.call(ekso.Controllers[controller], request, reply)
+          handlerFunc.call(controllerObj, request, reply)
         }
 
         server.route({ method, path, handler, config })
