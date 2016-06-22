@@ -7,6 +7,12 @@ module.exports = {
       auth: 'jwt',
       plugins: {
         hapiAuthorization: { roles: ['SUPER_ADMIN', 'ADMIN'] }
+      },
+      validate: {
+        query: {
+          title: Helpers.joi.string().required(),
+          content: Helpers.joi.string().required()
+        }
       }
     }
   }
