@@ -1,5 +1,12 @@
 module.exports = {
   getPosts () {
+    this.$request('get', 'posts', (err, res) => {
+      if (err) {
+        this.$root.addNotifyMessage('danger', 'Can not load posts')
+      } else {
+        this.$root.posts = res
+      }
+    })
   },
 
   createPost (data) {
