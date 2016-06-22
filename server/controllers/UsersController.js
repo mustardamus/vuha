@@ -70,12 +70,16 @@ module.exports = {
   },
 
   read (request, reply) {
-    User.findById(request.params.id, (err, user) => {
+    User.findOne({ username: request.params.username }, (err, user) => {
       if (err) {
-        reply(err)
-      } else {
+        return reply(Helpers.boom.badImplementation('Creating user'))
+      }
+
+      if (user) {
         user.password = undefined
         reply(user)
+      } else {
+        reply(Helpers.boom.preconditionFailed('User not found'))
       }
     })
   },
@@ -83,19 +87,23 @@ module.exports = {
   update (request, reply) {
     User.findById(request.params.id, (err, user) => {
       if (err) {
-        return reply(err)
+        return reply(Helpers.boom.badImplementation('Creating user'))
       }
 
-      user.role = request.query.role
+      if (user) {
+        user.role = request.query.role
 
-      user.save((err) => {
-        if (err) {
-          reply(err)
-        } else {
-          user.password = undefined
-          reply(user)
-        }
-      })
+        user.save((err) => {
+          if (err) {
+            reply(err)
+          } else {
+            user.password = undefined
+            reply(user)
+          }
+        })
+      } else {
+        reply(Helpers.boom.preconditionFailed('User not found'))
+      }
     })
   },
 

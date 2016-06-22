@@ -19,7 +19,7 @@ export default {
   },
 
   ready () {
-    this.$root.getUser(this.$route.params.id)
+    this.$root.getUser(this.$route.params.username)
   },
 
   methods: {

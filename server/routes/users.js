@@ -9,7 +9,7 @@ module.exports = {
     }
   },
 
-  'GET /users/{id}': {
+  'GET /users/{username}': {
     handler: 'UsersController.read',
     config: {
       auth: 'jwt',

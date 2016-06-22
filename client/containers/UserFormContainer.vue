@@ -20,7 +20,7 @@ export default {
   },
 
   ready () {
-    this.$root.getUser(this.$route.params.id)
+    this.$root.getUser(this.$route.params.username)
   },
 
   methods: {
@@ -29,7 +29,7 @@ export default {
     },
 
     onData (data) {
-      this.$root.updateUser(this.$route.params.id, {
+      this.$root.updateUser(this.user._id, {
         role: data.role
       })
     }

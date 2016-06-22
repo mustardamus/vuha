@@ -21,8 +21,8 @@
           </ul>
         </div>
         <footer class="card-footer">
-          <a class="card-footer-item" v-link="{ name: 'user', params: { id: user._id }}">View</a>
-          <a class="card-footer-item" v-link="{ name: 'userEdit', params: { id: user._id }}">Edit</a>
+          <a class="card-footer-item" v-link="{ name: 'user', params: { username: user.username }}">View</a>
+          <a class="card-footer-item" v-link="{ name: 'userEdit', params: { username: user.username }}">Edit</a>
           <a class="card-footer-item" @click="onDelete(user)">Delete</a>
         </footer>
       </div>

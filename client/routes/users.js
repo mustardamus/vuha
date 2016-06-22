@@ -4,12 +4,12 @@ module.exports = {
     component: require('../pages/Users.vue')
   },
 
-  '/users/:id': {
+  '/users/:username': {
     name: 'user',
     component: require('../pages/User.vue')
   },
 
-  '/users/:id/edit': {
+  '/users/:username/edit': {
     name: 'userEdit',
     component: require('../pages/UserEdit.vue')
   },

@@ -9,8 +9,8 @@ module.exports = {
     })
   },
 
-  getUser (userId) {
-    this.$request('get', 'users/' + userId, (err, res) => {
+  getUser (username) {
+    this.$request('get', 'users/' + username, (err, res) => {
       if (err) {
         this.$root.addNotifyError(err)
       } else {
