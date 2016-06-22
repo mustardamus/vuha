@@ -16,7 +16,7 @@ export default {
   data () {
     return {
       post: this.$root.post,
-      isAdmin: false
+      isAdmin: (this.$root.currentUser.role === 'SUPER_ADMIN' || this.$root.currentUser.role === 'ADMIN')
     }
   },
 
