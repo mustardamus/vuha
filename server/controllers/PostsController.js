@@ -12,11 +12,7 @@ module.exports = {
   },
 
   create (request, reply) {
-    let query = request.query
-    let post = new Post()
-
-    post.title = query.title
-    post.markdown = query.markdown
+    let post = new Post(request.query)
     post.userId = request.auth.credentials._id
 
     post.save((err) => {

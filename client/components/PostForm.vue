@@ -15,18 +15,30 @@
       </span>
     </p>
 
-    <label class="label" for="content">Content</label>
-    <p class="control">
+    <div class="columns">
+      <div class="column is-one-quarter">
+        <label class="label" for="excerpt">Excerpt</label>
+        <p class="control">
+          <textarea id="excerpt" name="excerpt" placeholder="Short excerpt what the post is about"
+            class="textarea" v-model="excerpt"
+          ></textarea>
+        </p>
+      </div>
 
-      <textarea id="markdown" name="markdown" placeholder="Content formatted in Markdown"
-        :class="{ textarea: true, 'is-danger': validation.markdown.$invalid && validation.$submitted }"
-        v-form-ctrl required v-model="markdown"
-      ></textarea>
+      <div class="column is-three-quarter">
+        <label class="label" for="markdown">Content</label>
+        <p class="control">
+          <textarea id="markdown" name="markdown" placeholder="Content formatted in Markdown"
+            :class="{ textarea: true, 'is-danger': validation.markdown.$invalid && validation.$submitted }"
+            v-form-ctrl required v-model="markdown"
+          ></textarea>
 
-      <span class="help is-danger" v-if="validation.markdown.$invalid && validation.$submitted">
-        Content is required
-      </span>
-    </p>
+          <span class="help is-danger" v-if="validation.markdown.$invalid && validation.$submitted">
+            Content is required
+          </span>
+        </p>
+      </div>
+    </div>
 
     <p class="control">
       <button class="button is-primary" type="submit">Create</button>
@@ -38,13 +50,13 @@
 export default {
   props: {
     title: String,
+    excerpt: String,
     markdown: String
   },
 
   data () {
     return {
-      validation: null,
-      passwordCheck: ''
+      validation: null
     }
   },
 
@@ -52,6 +64,7 @@ export default {
     this.$('form input').get(0).focus()
 
     this.title = 'Just keep on going'
+    this.excerpt = 'What this is about?!'
     this.markdown = '# Markdown\n\n* should\n* work'
   },
 
@@ -60,6 +73,7 @@ export default {
       if (this.validation.$valid) {
         this.$emit('data', {
           title: this.title,
+          excerpt: this.excerpt,
           markdown: this.markdown
         })
       } else {
