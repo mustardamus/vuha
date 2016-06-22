@@ -12,5 +12,10 @@ module.exports = {
   '/posts/:slug': {
     name: 'post',
     component: require('../pages/Post.vue')
+  },
+
+  '/posts/:slug/edit': {
+    name: 'postEdit',
+    component: require('../pages/PostEdit.vue')
   }
 }

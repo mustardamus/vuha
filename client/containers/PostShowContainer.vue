@@ -1,5 +1,5 @@
 <template>
-  <post-show :post="post"></post-show>
+  <post-show :post="post" :is-admin="isAdmin"></post-show>
 </template>
 
 <script>
@@ -9,12 +9,14 @@ export default {
   },
 
   watch: {
-    '$root.post': 'onChange'
+    '$root.post': 'onChange',
+    '$root.currentUser': 'onUserChange'
   },
 
   data () {
     return {
-      post: this.$root.post
+      post: this.$root.post,
+      isAdmin: false
     }
   },
 
@@ -25,6 +27,14 @@ export default {
   methods: {
     onChange (val) {
       this.post = val
+    },
+
+    onUserChange (user) {
+      if (user) {
+        this.isAdmin = (user.role === 'SUPER_ADMIN' || user.role === 'ADMIN')
+      } else {
+        this.isAdmin = false
+      }
     }
   }
 }
