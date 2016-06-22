@@ -28,13 +28,6 @@
             <span>Users</span>
           </a>
         </p>
-
-        <p class="nav-item">
-          <a class="button" v-link="{ name: 'postsNew', exact: true }">
-            <span class="icon"><i class="fa fa-plus"></i></span>
-            <span>New Post</span>
-          </a>
-        </p>
       </template>
     </div>
 
@@ -61,6 +54,15 @@
       </template>
 
       <template v-if="isLoggedIn">
+        <template v-if="isAdmin">
+          <p class="nav-item">
+            <a class="button" v-link="{ name: 'postsNew', exact: true }">
+              <span class="icon"><i class="fa fa-plus"></i></span>
+              <span>New Post</span>
+            </a>
+          </p>
+        </template>
+
         <p class="nav-item">
           <a class="button" v-link="{ name: 'profile' }">
             <span class="icon"><i class="fa fa-user"></i></span>
