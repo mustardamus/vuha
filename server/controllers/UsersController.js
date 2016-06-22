@@ -44,7 +44,7 @@ module.exports = {
   },
 
   create (request, reply) {
-    doesUserExist(query, (err, exists, msg) => {
+    doesUserExist(request.query, (err, exists, msg) => {
       if (err) {
         return reply(err)
       }
