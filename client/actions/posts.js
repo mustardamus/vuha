@@ -9,6 +9,20 @@ module.exports = {
     })
   },
 
+  getPost (postId) {
+    this.$request('get', 'posts/' + postId, (err, res) => {
+      if (err) {
+        this.$root.addNotifyError(err)
+      } else {
+        if (res) {
+          this.$root.post = res
+        } else {
+          this.$root.addNotifyMessage('danger', 'Can not find post')
+        }
+      }
+    })
+  },
+
   createPost (data) {
     this.$request('post', 'posts', data, (err, res) => {
       if (err) {

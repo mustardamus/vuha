@@ -7,5 +7,10 @@ module.exports = {
   '/posts/new': {
     name: 'postsNew',
     component: require('../pages/PostsNew.vue')
+  },
+
+  '/posts/:id': {
+    name: 'post',
+    component: require('../pages/Post.vue')
   }
 }
