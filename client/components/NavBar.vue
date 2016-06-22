@@ -16,8 +16,8 @@
 
       <p class="nav-item">
         <a class="button" v-link="{ name: 'posts', exact: true }">
-          <span class="icon"><i class="fa fa-home"></i></span>
-          <span>Posts</span>
+          <span class="icon"><i class="fa fa-newspaper-o"></i></span>
+          <span>Blog</span>
         </a>
       </p>
 
@@ -31,7 +31,7 @@
 
         <p class="nav-item">
           <a class="button" v-link="{ name: 'postsNew', exact: true }">
-            <span class="icon"><i class="fa fa-users"></i></span>
+            <span class="icon"><i class="fa fa-plus"></i></span>
             <span>New Post</span>
           </a>
         </p>
