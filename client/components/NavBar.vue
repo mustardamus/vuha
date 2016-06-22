@@ -14,6 +14,13 @@
         </a>
       </p>
 
+      <p class="nav-item">
+        <a class="button" v-link="{ name: 'posts', exact: true }">
+          <span class="icon"><i class="fa fa-home"></i></span>
+          <span>Posts</span>
+        </a>
+      </p>
+
       <template v-if="isAdmin">
         <p class="nav-item">
           <a class="button" v-link="{ name: 'users' }">
@@ -23,7 +30,7 @@
         </p>
 
         <p class="nav-item">
-          <a class="button" v-link="{ name: 'postsNew' }">
+          <a class="button" v-link="{ name: 'postsNew', exact: true }">
             <span class="icon"><i class="fa fa-users"></i></span>
             <span>New Post</span>
           </a>

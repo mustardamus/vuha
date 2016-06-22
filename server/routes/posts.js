@@ -11,7 +11,7 @@ module.exports = {
       validate: {
         query: {
           title: Helpers.joi.string().required(),
-          content: Helpers.joi.string().required()
+          markdown: Helpers.joi.string().required()
         }
       }
     }
