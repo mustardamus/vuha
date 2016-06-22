@@ -44,8 +44,6 @@ module.exports = {
   },
 
   create (request, reply) {
-    let query = request.query
-
     doesUserExist(query, (err, exists, msg) => {
       if (err) {
         return reply(err)
@@ -55,11 +53,8 @@ module.exports = {
         return reply(msg)
       }
 
-      let user = new User()
-
-      user.username = query.username
-      user.email = query.email
-      user.password = Helpers.bcrypt.hash(query.password)
+      let user = new User(request.query)
+      user.password = Helpers.bcrypt.hash(request.query.password)
 
       user.save((err) => {
         if (err) {
