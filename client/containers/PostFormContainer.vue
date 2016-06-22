@@ -1,7 +1,7 @@
 <template>
   <post-form
     :title="title"
-    :content="content"
+    :markdown="markdown"
     @data="onData"
   ></post-form>
 </template>

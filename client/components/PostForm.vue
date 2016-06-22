@@ -18,12 +18,12 @@
     <label class="label" for="content">Content</label>
     <p class="control">
 
-      <textarea id="content" name="content" placeholder="Content formatted in Markdown"
-        :class="{ textarea: true, 'is-danger': validation.content.$invalid && validation.$submitted }"
-        v-form-ctrl required v-model="content"
+      <textarea id="markdown" name="markdown" placeholder="Content formatted in Markdown"
+        :class="{ textarea: true, 'is-danger': validation.markdown.$invalid && validation.$submitted }"
+        v-form-ctrl required v-model="markdown"
       ></textarea>
 
-      <span class="help is-danger" v-if="validation.content.$invalid && validation.$submitted">
+      <span class="help is-danger" v-if="validation.markdown.$invalid && validation.$submitted">
         Content is required
       </span>
     </p>
@@ -38,7 +38,7 @@
 export default {
   props: {
     title: String,
-    content: String
+    markdown: String
   },
 
   data () {
@@ -52,7 +52,7 @@ export default {
     this.$('form input').get(0).focus()
 
     this.title = 'Just keep on going'
-    this.content = '# Markdown\n\n* should\n* work'
+    this.markdown = '# Markdown\n\n* should\n* work'
   },
 
   methods: {
@@ -60,7 +60,7 @@ export default {
       if (this.validation.$valid) {
         this.$emit('data', {
           title: this.title,
-          content: this.content
+          markdown: this.markdown
         })
       } else {
         this.$('form .vf-invalid').get(0).focus()
