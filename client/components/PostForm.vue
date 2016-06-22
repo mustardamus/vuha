@@ -22,7 +22,7 @@
         :class="{ textarea: true, 'is-danger': validation.content.$invalid && validation.$submitted }"
         v-form-ctrl required v-model="content"
       ></textarea>
-      
+
       <span class="help is-danger" v-if="validation.content.$invalid && validation.$submitted">
         Content is required
       </span>
@@ -35,11 +35,7 @@
 </template>
 
 <script>
-import CashMixin from '../mixins/cash.js'
-
 export default {
-  mixins: [CashMixin],
-
   props: {
     title: String,
     content: String

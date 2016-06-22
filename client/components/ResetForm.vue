@@ -45,11 +45,7 @@
 </template>
 
 <script>
-import CashMixin from '../mixins/cash.js'
-
 export default {
-  mixins: [CashMixin],
-
   data () {
     return {
       validation: null,

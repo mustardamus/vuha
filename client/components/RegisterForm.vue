@@ -65,11 +65,7 @@
 </template>
 
 <script>
-import CashMixin from '../mixins/cash.js'
-
 export default {
-  mixins: [CashMixin],
-
   props: {
     username: String,
     email: String,
