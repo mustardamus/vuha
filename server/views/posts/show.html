@@ -1,1 +1,39 @@
-<h1>{{title}}</h1>
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <title>Blog - {{title}}</title>
+
+    <meta name="title" content="{{title}}">
+    <meta name="author" content="{{user.username}}">
+    <meta name="description" content="{{excerpt}}">
+    <meta name="keywords" content="">
+    <meta name="language" content="en">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <link type="text/css" rel="stylesheet" href="/bulma.min.css">
+
+    <style type="text/css" media="screen">
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <section class="section">
+        <h1 class="title">{{title}}</h1>
+        <h2 class="excerpt">{{excerpt}}</h2>
+
+        <section class="section">
+          {{{html}}}
+        </section>
+      </section>
+    </div>
+
+    <script type="text/javascript">
+      window.location = location.origin + '/#!' + location.pathname
+    </script>
+  </body>
+</html>

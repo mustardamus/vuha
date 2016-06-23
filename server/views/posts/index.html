@@ -1,11 +1,46 @@
-<h1>Posts</h1>
+<!doctype html>
 
-<ul>
-  {{#each posts}}
-    <li>
-      <a href="/posts/{{slug}}">
-        {{title}}
-      </a>
-    </li>
-  {{/each}}
-</ul>
+<html lang="en">
+  <head>
+    <title>Blog</title>
+
+    <meta name="title" content="Blog">
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="language" content="en">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <link type="text/css" rel="stylesheet" href="/bulma.min.css">
+
+    <style type="text/css" media="screen">
+      .title, .subtitle {
+        display: block;
+      }
+
+      a:hover .title {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      {{#each posts}}
+        <section class="section">
+          <a href="/posts/{{slug}}">
+            <span class="title">{{title}}</span>
+            <span class="subtitle">{{excerpt}}</span>
+          </a>
+        </section>
+      {{/each}}
+    </div>
+
+    <script type="text/javascript">
+      window.location = location.origin + '/#!' + location.pathname
+    </script>
+  </body>
+</html>
