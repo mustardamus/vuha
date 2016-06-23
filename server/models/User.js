@@ -39,5 +39,14 @@ module.exports = function (mongoose) {
     return token
   }
 
+  schema.methods.getCleanJSON = function () {
+    let obj = this.toJSON()
+
+    delete obj.password
+    delete obj.resetToken
+
+    return obj
+  }
+
   return mongoose.model(name, schema)
 }

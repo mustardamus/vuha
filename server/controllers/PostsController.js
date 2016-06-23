@@ -31,7 +31,20 @@ module.exports = {
       }
 
       if (post) {
-        reply(post)
+        User.findById(post.userId, (err, user) => {
+          if (err) {
+            return reply(Helpers.boom.badImplementation('Find user'))
+          }
+
+          if (user) {
+            let retObj = _.assign(post.toJSON(), { user: user.getCleanJSON() })
+
+            reply(retObj)
+          } else {
+            reply(Helpers.boom.preconditionFailed('User not found'))
+          }
+        })
+
       } else {
         reply(Helpers.boom.preconditionFailed('Post not found'))
       }
@@ -40,7 +53,7 @@ module.exports = {
 
   update (request, reply) {
     let setObj = { $set: request.query }
-    
+
     Post.findByIdAndUpdate(request.params.id, setObj, (err, post) => {
       if (err) {
         return reply(Helpers.boom.badImplementation('Find post'))

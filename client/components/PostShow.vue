@@ -7,7 +7,7 @@
     Edit Post
   </a>
 
-  <h1 class="title">{{post.title}}</h1>
+  <h1 class="title">{{post.title}} by {{post.user.username}}</h1>
   <h2 class="subtitle">{{post.excerpt}}</h2>
 
   <section class="section">

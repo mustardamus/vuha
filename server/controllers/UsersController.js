@@ -39,6 +39,8 @@ module.exports = {
         return reply(err)
       }
 
+      // TODO return only clean json
+
       reply(users)
     })
   },
@@ -61,10 +63,7 @@ module.exports = {
           return reply(Helpers.boom.badImplementation('Creating user'))
         }
 
-        let token = user.getToken()
-        user.password = undefined
-
-        reply({ user, token })
+        reply({ user: user.getCleanJSON(), token: user.getToken() })
       })
     })
   },
@@ -76,8 +75,7 @@ module.exports = {
       }
 
       if (user) {
-        user.password = undefined
-        reply(user)
+        reply(user.getCleanJSON())
       } else {
         reply(Helpers.boom.preconditionFailed('User not found'))
       }
@@ -97,8 +95,7 @@ module.exports = {
           if (err) {
             reply(err)
           } else {
-            user.password = undefined
-            reply(user)
+            reply(user.getCleanJSON())
           }
         })
       } else {
@@ -110,10 +107,10 @@ module.exports = {
   delete (request, reply) {
     User.findByIdAndRemove(request.params.id, (err) => {
       if (err) {
-        return reply(err)
+        reply(err)
+      } else {
+        reply(true)
       }
-
-      reply({ success: true })
     })
   },
 
@@ -121,8 +118,7 @@ module.exports = {
     let user = request.auth.credentials
 
     if (user) {
-      user.password = undefined
-      reply(user)
+      reply(user.getCleanJSON())
     } else {
       reply(Helpers.boom.preconditionFailed('Credentials not found'))
     }
@@ -161,8 +157,7 @@ module.exports = {
           return reply(Helpers.boom.badImplementation('User not saved'))
         }
 
-        user.password = undefined
-        reply(user)
+        reply(reply(true))
       })
     })
   },

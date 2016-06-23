@@ -40,10 +40,7 @@ module.exports = {
               return reply(Helpers.boom.badImplementation('Update login time'))
             }
 
-            let token = user.getToken()
-            user.password = undefined
-
-            reply({ user, token })
+            reply({ user: user.getCleanJSON(), token: user.getToken() })
           })
         } else {
           reply(Helpers.boom.preconditionFailed('Password does not match'))
