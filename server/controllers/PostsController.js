@@ -36,5 +36,21 @@ module.exports = {
         reply(Helpers.boom.preconditionFailed('Post not found'))
       }
     })
-  }
+  },
+
+  update (request, reply) {
+    let setObj = { $set: request.query }
+    
+    Post.findByIdAndUpdate(request.params.id, setObj, (err, post) => {
+      if (err) {
+        return reply(Helpers.boom.badImplementation('Find post'))
+      }
+
+      if (post) {
+        reply(post)
+      } else {
+        reply(Helpers.boom.preconditionFailed('Post not found'))
+      }
+    })
+  },
 }

@@ -17,5 +17,22 @@ module.exports = {
         }
       }
     }
+  },
+
+  'PUT /posts/{id}': {
+    handler: 'PostsController.update',
+    config: {
+      auth: 'jwt',
+      plugins: {
+        hapiAuthorization: { roles: ['SUPER_ADMIN', 'ADMIN'] }
+      },
+      validate: {
+        query: {
+          title: Helpers.joi.string().required(),
+          excerpt: Helpers.joi.string(),
+          markdown: Helpers.joi.string().required()
+        }
+      }
+    }
   }
 }

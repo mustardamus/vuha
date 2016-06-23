@@ -26,14 +26,12 @@ export default {
   },
 
   ready () {
-    if (!this.post.title) {
-      this.$root.getPost(this.$route.params.slug)
-    }
+    this.$root.getPost(this.$route.params.slug)
   },
 
   methods: {
     onData (data) {
-      console.log('update post', data)
+      this.$root.updatePost(this.post._id, data)
     },
 
     onPostChange (val) {

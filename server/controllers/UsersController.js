@@ -72,7 +72,7 @@ module.exports = {
   read (request, reply) {
     User.findOne({ username: request.params.username }, (err, user) => {
       if (err) {
-        return reply(Helpers.boom.badImplementation('Creating user'))
+        return reply(Helpers.boom.badImplementation('Find user'))
       }
 
       if (user) {
@@ -87,7 +87,7 @@ module.exports = {
   update (request, reply) {
     User.findById(request.params.id, (err, user) => {
       if (err) {
-        return reply(Helpers.boom.badImplementation('Creating user'))
+        return reply(Helpers.boom.badImplementation('Find user'))
       }
 
       if (user) {

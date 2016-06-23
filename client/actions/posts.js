@@ -32,5 +32,16 @@ module.exports = {
         this.$router.go({ name: 'post', params: { slug: res.slug } })
       }
     })
-  }
+  },
+
+  updatePost (postId, data) {
+    this.$request('put', 'posts/' + postId, data, (err, res) => {
+      if (err) {
+        this.$root.addNotifyError(err)
+      } else {
+        this.$root.post = res
+        this.$root.addNotifyMessage('success', 'Updated successfully')
+      }
+    })
+  },
 }
