@@ -19,9 +19,14 @@
       <div class="column is-one-quarter">
         <label class="label" for="excerpt">Excerpt</label>
         <p class="control">
-          <textarea id="excerpt" name="excerpt" placeholder="Short excerpt what the post is about"
-            class="textarea" v-model="excerpt"
+          <textarea id="excerpt" name="excerpt" placeholder="Short description what the post is about"
+            :class="{ textarea: true, 'is-danger': validation.excerpt.$invalid && validation.$submitted }"
+            v-form-ctrl required v-model="excerpt"
           ></textarea>
+
+          <span class="help is-danger" v-if="validation.excerpt.$invalid && validation.$submitted">
+            Excerpt is required
+          </span>
         </p>
       </div>
 

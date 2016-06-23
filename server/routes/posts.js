@@ -12,7 +12,7 @@ module.exports = {
       validate: {
         query: {
           title: Helpers.joi.string().required(),
-          excerpt: Helpers.joi.string(),
+          excerpt: Helpers.joi.string().required(),
           markdown: Helpers.joi.string().required()
         }
       }
@@ -29,7 +29,7 @@ module.exports = {
       validate: {
         query: {
           title: Helpers.joi.string().required(),
-          excerpt: Helpers.joi.string(),
+          excerpt: Helpers.joi.string().required(),
           markdown: Helpers.joi.string().required()
         }
       }
