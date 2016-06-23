@@ -36,12 +36,14 @@ module.exports = {
   index (request, reply) {
     User.find((err, users) => {
       if (err) {
-        return reply(err)
+        return reply(Helpers.boom.badImplementation('Finding users'))
       }
 
-      // TODO return only clean json
+      let retArr = _.map(users, (user) => {
+        return user.getCleanJSON()
+      })
 
-      reply(users)
+      reply(retArr)
     })
   },
 
