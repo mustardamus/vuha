@@ -62,6 +62,7 @@
     "request": "^2.72.0",
     "slug": "^0.9.1",
     "superagent": "^1.8.3",
+    "vision": "^4.1.0",
     "vue": "^1.0.21",
     "vue-form": "^0.3.1",
     "vue-router": "^0.7.13"

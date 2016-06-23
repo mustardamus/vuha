@@ -2,11 +2,15 @@
 
 module.exports = {
   index (request, reply) {
-    Post.find((err, posts) => {
+    Post.find().sort({ createdAt: -1 }).exec((err, posts) => {
       if (err) {
-        reply(Helpers.boom.badImplementation('Find posts'))
-      } else {
+        return reply(Helpers.boom.badImplementation('Find posts'))
+      }
+
+      if (request.headers.accept === 'application/json') {
         reply(posts)
+      } else {
+        reply.view('posts/index', { posts })
       }
     })
   },
@@ -39,12 +43,15 @@ module.exports = {
           if (user) {
             let retObj = _.assign(post.toJSON(), { user: user.getCleanJSON() })
 
-            reply(retObj)
+            if (request.headers.accept === 'application/json') {
+              reply(retObj)
+            } else {
+              reply.view('posts/show', retObj)
+            }
           } else {
             reply(Helpers.boom.preconditionFailed('User not found'))
           }
         })
-
       } else {
         reply(Helpers.boom.preconditionFailed('Post not found'))
       }
