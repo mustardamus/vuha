@@ -48,5 +48,9 @@ module.exports = function (mongoose) {
     return obj
   }
 
+  schema.methods.isAdmin = function () {
+    return (this.role === 'SUPER_ADMIN' || this.role === 'ADMIN')
+  }
+
   return mongoose.model(name, schema)
 }

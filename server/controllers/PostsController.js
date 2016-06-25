@@ -1,19 +1,29 @@
 'use strict'
 
 module.exports = {
-  // TODO: make route for logged in user to return all un/published posts
-
   index (request, reply) {
-    Post.find({ published: true }).sort({ createdAt: -1 }).exec((err, posts) => {
+    Helpers.currentUser(request, (err, authenticated, user) => {
       if (err) {
-        return reply(Helpers.boom.badImplementation('Find posts'))
+        return reply(Helpers.boom.badImplementation('Current user'))
       }
 
-      if (request.headers.accept === 'application/json') {
-        reply(posts)
-      } else {
-        reply.view('posts/index', { posts })
+      let findObj = { published: true }
+
+      if (authenticated && user.isAdmin()) {
+        findObj = {}
       }
+
+      Post.find(findObj).sort({ createdAt: -1 }).exec((err, posts) => {
+        if (err) {
+          return reply(Helpers.boom.badImplementation('Find posts'))
+        }
+
+        if (request.headers.accept === 'application/json') {
+          reply(posts)
+        } else {
+          reply.view('posts/index', { posts })
+        }
+      })
     })
   },
 
@@ -31,34 +41,44 @@ module.exports = {
   },
 
   read (request, reply) {
-    let findObj = { slug: request.params.slug, published: true }
-
-    Post.findOne(findObj, (err, post) => {
+    Helpers.currentUser(request, (err, authenticated, user) => {
       if (err) {
-        return reply(Helpers.boom.badImplementation('Find post'))
+        return reply(Helpers.boom.badImplementation('Current user'))
+      }
+      
+      let findObj = { slug: request.params.slug, published: true }
+
+      if (authenticated && user.isAdmin()) {
+        delete findObj.published
       }
 
-      if (post) {
-        User.findById(post.userId, (err, user) => {
-          if (err) {
-            return reply(Helpers.boom.badImplementation('Find user'))
-          }
+      Post.findOne(findObj, (err, post) => {
+        if (err) {
+          return reply(Helpers.boom.badImplementation('Find post'))
+        }
 
-          if (user) {
-            let retObj = _.assign(post.toJSON(), { user: user.getCleanJSON() })
-
-            if (request.headers.accept === 'application/json') {
-              reply(retObj)
-            } else {
-              reply.view('posts/show', retObj)
+        if (post) {
+          User.findById(post.userId, (err, user) => {
+            if (err) {
+              return reply(Helpers.boom.badImplementation('Find user'))
             }
-          } else {
-            reply(Helpers.boom.preconditionFailed('User not found'))
-          }
-        })
-      } else {
-        reply(Helpers.boom.preconditionFailed('Post not found'))
-      }
+
+            if (user) {
+              let retObj = _.assign(post.toJSON(), { user: user.getCleanJSON() })
+
+              if (request.headers.accept === 'application/json') {
+                reply(retObj)
+              } else {
+                reply.view('posts/show', retObj)
+              }
+            } else {
+              reply(Helpers.boom.preconditionFailed('User not found'))
+            }
+          })
+        } else {
+          reply(Helpers.boom.preconditionFailed('Post not found'))
+        }
+      })
     })
   },
 
