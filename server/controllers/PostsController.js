@@ -45,7 +45,7 @@ module.exports = {
       if (err) {
         return reply(Helpers.boom.badImplementation('Current user'))
       }
-      
+
       let findObj = { slug: request.params.slug, published: true }
 
       if (authenticated && user.isAdmin()) {
@@ -83,15 +83,21 @@ module.exports = {
   },
 
   update (request, reply) {
-    let setObj = { $set: request.query }
-
-    Post.findByIdAndUpdate(request.params.id, setObj, (err, post) => {
+    Post.findById(request.params.id, (err, post) => {
       if (err) {
         return reply(Helpers.boom.badImplementation('Find post'))
       }
 
       if (post) {
-        reply(post)
+        _.assign(post, request.query)
+
+        post.save((err) => {
+          if (err) {
+            reply(Helpers.boom.badImplementation('Save post'))
+          } else {
+            reply(post)
+          }
+        })
       } else {
         reply(Helpers.boom.preconditionFailed('Post not found'))
       }

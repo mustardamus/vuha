@@ -12,7 +12,7 @@ module.exports = function (mongoose) {
     excerpt: { type: String },
     markdown: { type: String, required: true },
     html: { type: String },
-    published: { type: Boolean, required: false }
+    published: { type: Boolean, default: false }
   }, {
     timestamps: true
   })
