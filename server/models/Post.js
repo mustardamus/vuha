@@ -11,7 +11,8 @@ module.exports = function (mongoose) {
     slug: { type: String },
     excerpt: { type: String },
     markdown: { type: String, required: true },
-    html: { type: String }
+    html: { type: String },
+    published: { type: Boolean, required: false }
   }, {
     timestamps: true
   })

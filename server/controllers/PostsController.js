@@ -1,8 +1,10 @@
 'use strict'
 
 module.exports = {
+  // TODO: make route for logged in user to return all un/published posts
+
   index (request, reply) {
-    Post.find().sort({ createdAt: -1 }).exec((err, posts) => {
+    Post.find({ published: true }).sort({ createdAt: -1 }).exec((err, posts) => {
       if (err) {
         return reply(Helpers.boom.badImplementation('Find posts'))
       }
@@ -29,7 +31,9 @@ module.exports = {
   },
 
   read (request, reply) {
-    Post.findOne({ slug: request.params.slug }, (err, post) => {
+    let findObj = { slug: request.params.slug, published: true }
+
+    Post.findOne(findObj, (err, post) => {
       if (err) {
         return reply(Helpers.boom.badImplementation('Find post'))
       }

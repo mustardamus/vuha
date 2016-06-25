@@ -13,7 +13,8 @@ module.exports = {
         query: {
           title: Helpers.joi.string().required(),
           excerpt: Helpers.joi.string().required(),
-          markdown: Helpers.joi.string().required()
+          markdown: Helpers.joi.string().required(),
+          published: Helpers.joi.boolean().required()
         }
       }
     }
@@ -30,7 +31,8 @@ module.exports = {
         query: {
           title: Helpers.joi.string().required(),
           excerpt: Helpers.joi.string().required(),
-          markdown: Helpers.joi.string().required()
+          markdown: Helpers.joi.string().required(),
+          published: Helpers.joi.boolean().required()
         }
       }
     }

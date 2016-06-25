@@ -3,6 +3,7 @@
     :title="post.title"
     :excerpt="post.excerpt"
     :markdown="post.markdown"
+    :published="post.published"
     :button-text="buttonText"
     @data="onData"
   ></post-form>

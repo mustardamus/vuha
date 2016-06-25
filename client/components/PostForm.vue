@@ -28,6 +28,13 @@
             Excerpt is required
           </span>
         </p>
+
+        <p class="control">
+          <label class="checkbox">
+            <input type="checkbox" v-model="published">
+            Published
+          </label>
+        </p>
       </div>
 
       <div class="column is-three-quarter">
@@ -57,6 +64,7 @@ export default {
     title: String,
     excerpt: String,
     markdown: String,
+    published: Boolean,
     buttonText: String
   },
 
@@ -76,7 +84,8 @@ export default {
         this.$emit('data', {
           title: this.title,
           excerpt: this.excerpt,
-          markdown: this.markdown
+          markdown: this.markdown,
+          published: this.published
         })
       } else {
         this.$('form .vf-invalid').get(0).focus()
