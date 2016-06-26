@@ -43,5 +43,5 @@ module.exports = {
         this.$root.addNotifyMessage('success', 'Updated successfully')
       }
     })
-  },
+  }
 }

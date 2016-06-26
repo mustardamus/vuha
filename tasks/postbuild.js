@@ -4,7 +4,7 @@ const fs = require('fs')
 const crypto = require('crypto')
 const path = require('path')
 
-let publicPath = path.join(__dirname, '/../public')
+let publicPath = path.join(__dirname, '../public')
 let buildFile = 'build.js'
 let buildPath = publicPath + '/' + buildFile
 let indexPath = publicPath + '/index.html'

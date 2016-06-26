@@ -49,7 +49,7 @@ module.exports = {
       auth: 'jwt',
       validate: {
         query: {
-          role: Helpers.joi.string().required(),
+          role: Helpers.joi.string().required()
         }
       },
       plugins: {

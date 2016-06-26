@@ -1,9 +1,10 @@
 'use strict'
 
 const fs = require('fs')
+const path = require('path')
 const Handlebars = require('handlebars')
 
-const mailTemplatesPath = __dirname + '/../views/mails/reset'
+const mailTemplatesPath = path.join(__dirname, '../views/mails/reset')
 const resetTextTemplate = Handlebars.compile(fs.readFileSync(mailTemplatesPath + '/text.hbs', 'utf8'))
 const resetHtmlTemplate = Handlebars.compile(fs.readFileSync(mailTemplatesPath + '/html.hbs', 'utf8'))
 

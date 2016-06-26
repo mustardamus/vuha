@@ -102,5 +102,5 @@ module.exports = {
         reply(Helpers.boom.preconditionFailed('Post not found'))
       }
     })
-  },
+  }
 }
