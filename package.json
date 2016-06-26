@@ -31,9 +31,11 @@
     "server-lint": "eslint --ext .js server/**/*.js test/server/**/*.js",
     "server-test": "mocha server/test/**/*.js",
     "server": "forever -f -m 3 --watch --watchDirectory=server server/index.js",
+    "tasks-lint": "eslint --ext .js tasks/**/*.js",
     "start": "parallelshell 'mongod' 'npm run server' 'npm run client-proxy'",
     "build": "npm run client-clean && npm run client-copy && npm run client-fonts && npm run client-build",
-    "lint": "parallelshell 'npm run client-lint' 'npm run server-lint'",
+    "postbuild": "node tasks/postbuild.js",
+    "lint": "parallelshell 'npm run client-lint' 'npm run server-lint' 'npm run tasks-lint'",
     "test": "parallelshell 'npm run client-test' 'npm run server-test'"
   },
   "dependencies": {
