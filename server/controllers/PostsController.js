@@ -102,5 +102,15 @@ module.exports = {
         reply(Helpers.boom.preconditionFailed('Post not found'))
       }
     })
+  },
+
+  delete (request, reply) {
+    Post.findByIdAndRemove(request.params.id, (err) => {
+      if (err) {
+        reply(err)
+      } else {
+        reply(true)
+      }
+    })
   }
 }

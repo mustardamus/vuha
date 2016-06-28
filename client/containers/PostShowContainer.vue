@@ -1,5 +1,5 @@
 <template>
-  <post-show :post="post" :is-admin="isAdmin"></post-show>
+  <post-show :post="post" :is-admin="isAdmin" @delete="onDelete"></post-show>
 </template>
 
 <script>
@@ -35,6 +35,10 @@ export default {
       } else {
         this.isAdmin = false
       }
+    },
+
+    onDelete (postId) {
+      this.$root.deletePost(postId)
     }
   }
 }

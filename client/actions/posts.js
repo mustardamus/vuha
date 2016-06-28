@@ -43,5 +43,16 @@ module.exports = {
         this.$root.addNotifyMessage('success', 'Updated successfully')
       }
     })
+  },
+
+  deletePost (postId) {
+    this.$request('delete', 'posts/' + postId, (err, res) => {
+      if (err) {
+        this.$root.addNotifyError(err)
+      } else {
+        this.$root.addNotifyMessage('success', 'Post successfully deleted')
+        this.$router.go({ name: 'posts' })
+      }
+    })
   }
 }

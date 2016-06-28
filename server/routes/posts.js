@@ -36,5 +36,15 @@ module.exports = {
         }
       }
     }
+  },
+
+  'DELETE /posts/{id}': {
+    handler: 'PostsController.delete',
+    config: {
+      auth: 'jwt',
+      plugins: {
+        hapiAuthorization: { roles: ['SUPER_ADMIN', 'ADMIN'] }
+      }
+    }
   }
 }
