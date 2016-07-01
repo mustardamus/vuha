@@ -26,3 +26,4 @@
 * [UglifyJS 2](https://github.com/mishoo/UglifyJS2) - JavaScript parser / mangler / compressor / beautifier toolkit
 * [Moment.js](http://momentjs.com/docs/) - Parse, validate, manipulate, and display dates in javascript
 * [Handlebars](http://handlebarsjs.com/) - build semantic templates effectively with no frustration
+* [FontAwesome](http://fontawesome.io/icons) - scalable vector icons that can instantly be customized
